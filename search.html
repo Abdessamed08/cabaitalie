@@ -3,189 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boutique - Rumusha</title>
+    <title>Collection - caba_italie2</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --purple: #9333ea;
-            --very-dark-purple: #2d1b4d;
+            --emerald-dark: #1B3022;
+            --ruby-red: #9B1B30;
+            --alabaster: #F2F0E9;
+            --gold-leaf: #C5A059;
+            --carbon: #0D130E;
         }
-        body { font-family: 'Inter', sans-serif; }
-        .font-lora { font-family: 'Lora', serif; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--emerald-dark);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(155, 27, 48, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(197, 160, 89, 0.08) 0%, transparent 50%),
+                url("https://www.transparenttextures.com/patterns/black-linen.png");
+            color: var(--alabaster);
+            overflow-x: hidden; 
+        }
+        .font-luxury { font-family: 'Playfair Display', serif; }
         
-        .filter-checkbox:checked + label {
-            background-color: var(--purple);
-            color: white;
-            border-color: var(--purple);
-        }
-
-        /* Cart Sidebar (Shared) */
-        #cart-sidebar { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        #cart-sidebar { transition: transform 0.6s cubic-bezier(0.82, 0.01, 0.21, 1); background-color: var(--alabaster); color: var(--carbon); }
         #cart-sidebar.closed { transform: translateX(100%); }
+
+        .filter-btn { transition: all 0.3s; border: 1px solid rgba(242, 240, 233, 0.1); }
+        .filter-btn.active { background-color: var(--ruby-red); border-color: var(--ruby-red); color: white; }
     </style>
 </head>
-<body class="bg-neutral-50 text-black">
+<body>
 
     <!-- PANIER (SIDEBAR) -->
-    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[450px] bg-white z-[100] shadow-2xl flex flex-col closed">
-        <div class="p-6 border-b flex justify-between items-center">
-            <h2 class="text-2xl font-bold font-lora text-very-dark-purple">Votre Panier (<span id="cart-count-sidebar">0</span>)</h2>
-            <button onclick="toggleCart()" class="text-3xl hover:text-purple transition">&times;</button>
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[500px] z-[100] shadow-2xl flex flex-col closed">
+        <div class="p-8 border-b border-black/10 flex justify-between items-center">
+            <h2 class="text-3xl font-luxury font-black uppercase tracking-tighter">Votre Panier (<span id="cart-count-sidebar">0</span>)</h2>
+            <button onclick="toggleCart()" class="text-4xl hover:text-ruby-red transition">&times;</button>
         </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
-            <div id="empty-cart-msg" class="h-full flex flex-col items-center justify-center text-neutral-400 gap-4">
-                <i class="fa-solid fa-cart-shopping text-6xl opacity-20"></i>
-                <p class="text-lg">Votre panier est encore vide</p>
-                <button onclick="toggleCart()" class="text-purple font-bold hover:underline">Continuer vos achats</button>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-8 space-y-6">
+            <div id="empty-cart-msg" class="h-full flex flex-col items-center justify-center text-neutral-400 gap-6">
+                <i class="fa-solid fa-bag-shopping text-7xl opacity-10"></i>
+                <p class="text-xl font-luxury italic">Votre panier est encore vide</p>
             </div>
         </div>
-        <div class="p-6 border-t bg-neutral-50 text-xl font-bold flex justify-between">
-            <span>Total</span>
-            <span id="cart-total">0 DZD</span>
+        <div class="p-8 bg-black/5 border-t border-black/10">
+            <div class="flex justify-between text-2xl font-black mb-8 uppercase tracking-tighter">
+                <span>Total</span>
+                <span id="cart-total" class="text-ruby-red">0 DZD</span>
+            </div>
+            <button class="w-full bg-carbon text-white py-6 font-black uppercase tracking-[0.3em] text-xs hover:bg-ruby-red transition-all duration-500 shadow-2xl">Passer à la caisse</button>
         </div>
     </div>
-    <div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] hidden" onclick="toggleCart()"></div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-md z-[90] hidden" onclick="toggleCart()"></div>
 
     <!-- HEADER -->
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-purple/10 h-20">
-        <div class="max-w-[1440px] mx-auto h-full flex items-center justify-between px-6 lg:px-12">
-            <a href="index.html" class="flex items-center hover:scale-105 transition">
-                <img src="public/images/logo.png" alt="Rumusha" class="h-10 md:h-12">
+    <header class="sticky top-0 z-50 bg-carbon/95 backdrop-blur-xl border-b border-gold-leaf/20 h-24">
+        <div class="max-w-[1600px] mx-auto h-full flex items-center justify-between px-8 lg:px-16">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <i class="fa-solid fa-arrow-left text-gold-leaf group-hover:-translate-x-2 transition"></i>
+                <span class="font-luxury text-3xl font-black uppercase tracking-tighter text-alabaster">caba_italie2</span>
             </a>
-            <div class="flex items-center gap-6">
-                <a href="index.html" class="text-sm font-black uppercase tracking-widest text-neutral-400 hover:text-purple transition">Accueil</a>
+            <div class="flex items-center gap-10">
                 <button onclick="toggleCart()" class="relative group">
-                    <i class="fa-solid fa-bag-shopping text-2xl group-hover:text-purple transition"></i>
-                    <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-purple text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-lg">0</span>
+                    <div class="relative">
+                        <i class="fa-solid fa-shopping-bag text-2xl text-alabaster group-hover:text-ruby-red transition"></i>
+                        <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-ruby-red text-alabaster text-[9px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-xl border-2 border-carbon">0</span>
+                    </div>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- SEARCH HERO -->
-    <section class="bg-very-dark-purple py-24 text-center px-6">
-        <h1 class="text-white text-6xl md:text-7xl font-lora font-bold mb-6">Explorez la Boutique</h1>
-        <p class="text-white/60 text-xl max-w-2xl mx-auto">Découvrez notre sélection curatée de vêtements et accessoires japonais modernes.</p>
+    <section class="py-32 text-center bg-carbon/40 backdrop-blur-sm border-b border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center">
+            <span class="text-[30vw] font-luxury font-black text-white">SHOP</span>
+        </div>
+        <div class="relative z-10 px-8">
+            <h1 class="text-white text-6xl md:text-8xl font-luxury font-black italic mb-8 tracking-tighter leading-tight">Explorez la <br><span class="text-ruby-red">Collection Milan</span></h1>
+            <p class="text-alabaster/40 text-xl max-w-2xl mx-auto italic font-medium">L'essence de l'artisanat italien, sélectionnée pièce par pièce pour vous.</p>
+        </div>
     </section>
 
     <!-- MAIN SHOP AREA -->
-    <main class="max-w-[1440px] mx-auto py-16 px-6 lg:px-12 flex flex-col lg:flex-row gap-16">
+    <main class="max-w-[1600px] mx-auto py-24 px-8 lg:px-16 flex flex-col lg:flex-row gap-24">
         <!-- FILTRES -->
-        <aside class="w-full lg:w-72 flex flex-col gap-12">
-            <div class="space-y-6">
-                <h3 class="font-black uppercase tracking-widest text-sm text-very-dark-purple pb-4 border-b">Catégories</h3>
-                <div class="flex flex-wrap lg:flex-col gap-3">
-                    <label class="flex items-center justify-between cursor-pointer group">
-                        <span class="font-bold text-neutral-500 group-hover:text-purple transition">Nouveautés</span>
-                        <span class="text-xs bg-neutral-100 px-2 py-1 rounded-full">12</span>
-                    </label>
-                    <label class="flex items-center justify-between cursor-pointer group">
-                        <span class="font-bold text-purple">Vêtements</span>
-                        <span class="text-xs bg-purple/10 text-purple px-2 py-1 rounded-full">45</span>
-                    </label>
-                    <label class="flex items-center justify-between cursor-pointer group">
-                        <span class="font-bold text-neutral-500 group-hover:text-purple transition">Sacs</span>
-                        <span class="text-xs bg-neutral-100 px-2 py-1 rounded-full">18</span>
-                    </label>
+        <aside class="w-full lg:w-80 flex flex-col gap-16">
+            <div class="space-y-10">
+                <h3 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf pb-6 border-b border-white/10">Catégories</h3>
+                <div class="flex flex-col gap-4">
+                    <button class="filter-btn active w-full py-4 px-6 text-left font-black uppercase tracking-widest text-[10px] rounded-xl">Tout</button>
+                    <button class="filter-btn w-full py-4 px-6 text-left font-black uppercase tracking-widest text-[10px] rounded-xl">Vêtements</button>
+                    <button class="filter-btn w-full py-4 px-6 text-left font-black uppercase tracking-widest text-[10px] rounded-xl">Sacs</button>
+                    <button class="filter-btn w-full py-4 px-6 text-left font-black uppercase tracking-widest text-[10px] rounded-xl">Chaussures</button>
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <h3 class="font-black uppercase tracking-widest text-sm text-very-dark-purple pb-4 border-b">Taille</h3>
-                <div class="flex flex-wrap gap-2">
-                    <button class="w-10 h-10 border-2 border-neutral-100 rounded-lg flex items-center justify-center font-bold text-xs hover:border-purple">S</button>
-                    <button class="w-10 h-10 border-2 border-purple bg-purple/5 rounded-lg flex items-center justify-center font-bold text-xs">M</button>
-                    <button class="w-10 h-10 border-2 border-neutral-100 rounded-lg flex items-center justify-center font-bold text-xs hover:border-purple">L</button>
-                    <button class="w-10 h-10 border-2 border-neutral-100 rounded-lg flex items-center justify-center font-bold text-xs hover:border-purple">XL</button>
-                </div>
-            </div>
-
-            <div class="space-y-6">
-                <h3 class="font-black uppercase tracking-widest text-sm text-very-dark-purple pb-4 border-b">Prix</h3>
-                <input type="range" class="w-full accent-purple" min="0" max="100000" step="5000">
-                <div class="flex justify-between font-bold text-sm text-neutral-400">
-                    <span>0 DZD</span>
-                    <span>100 000 DZD</span>
+            <div class="space-y-10">
+                <h3 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf pb-6 border-b border-white/10">Budget (DZD)</h3>
+                <input type="range" class="w-full accent-ruby-red bg-white/10" min="0" max="100000" step="5000">
+                <div class="flex justify-between font-black text-[10px] text-alabaster/40 uppercase tracking-widest">
+                    <span>0</span>
+                    <span>100 000+</span>
                 </div>
             </div>
         </aside>
 
         <!-- GRID PRODUITS -->
         <div class="flex-1">
-            <div class="flex justify-between items-center mb-12">
-                <p class="font-bold text-neutral-400">45 produits trouvés</p>
-                <select class="bg-transparent border-b-2 border-neutral-200 font-bold py-2 outline-none focus:border-purple">
-                    <option>Nouveautés</option>
-                    <option>Prix croissant</option>
-                    <option>Prix décroissant</option>
+            <div class="flex justify-between items-center mb-16">
+                <p class="font-black text-[10px] text-alabaster/40 uppercase tracking-[0.3em]">Affichage de la collection</p>
+                <select class="bg-transparent border-b border-white/20 font-black text-[10px] py-2 outline-none focus:border-ruby-red uppercase tracking-widest text-alabaster">
+                    <option class="bg-carbon">Nouveautés</option>
+                    <option class="bg-carbon">Prix croissant</option>
+                    <option class="bg-carbon">Prix décroissant</option>
                 </select>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16">
                 <!-- Produit 1 -->
-                <div class="group flex flex-col gap-6">
-                    <div class="relative aspect-[3/4] rounded-[40px] overflow-hidden bg-white shadow-sm group-hover:shadow-2xl transition-all duration-500">
-                        <img src="public/images/screenshots/home.webp" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                        <button onclick="addToCart(1, 'Chemise Kimono Moderne', 12500, 'public/images/screenshots/home.webp')" class="absolute bottom-6 right-6 w-14 h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-xl opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-purple hover:text-white">
+                <div class="group flex flex-col gap-8">
+                    <div class="relative aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl transition-all duration-500">
+                        <img src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <button onclick="addToCart(1, 'Veste Sartoriale Rumusha', 12500, 'public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg')" class="absolute bottom-8 right-8 w-16 h-16 bg-alabaster text-carbon rounded-full shadow-3xl flex items-center justify-center text-xl opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-ruby-red hover:text-white">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="text-purple font-black uppercase text-[10px] tracking-widest">Vêtements</span>
-                            <div class="flex text-yellow-400 text-[10px] gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        </div>
-                        <a href="product.html"><h3 class="text-2xl font-bold text-very-dark-purple hover:text-purple transition">Chemise Kimono Moderne</h3></a>
-                        <p class="text-2xl font-black text-very-dark-purple tracking-tighter mt-2">12 500 DZD</p>
+                    <div class="text-center">
+                        <span class="text-ruby-red font-black uppercase text-[10px] tracking-[0.4em] mb-4 block">Vêtements</span>
+                        <a href="product.html"><h3 class="text-2xl font-luxury font-black text-alabaster hover:text-ruby-red transition tracking-tighter">Veste Sartoriale Rumusha</h3></a>
+                        <p class="text-2xl font-black text-alabaster tracking-tighter mt-4">12 500 DZD</p>
                     </div>
                 </div>
 
                 <!-- Produit 2 -->
-                <div class="group flex flex-col gap-6">
-                    <div class="relative aspect-[3/4] rounded-[40px] overflow-hidden bg-white shadow-sm group-hover:shadow-2xl transition-all duration-500">
-                        <img src="public/images/promotions/winter.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                        <button onclick="addToCart(2, 'Manteau d\'Hiver Élégant', 35000, 'public/images/promotions/winter.jpg')" class="absolute bottom-6 right-6 w-14 h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-xl opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-purple hover:text-white">
+                <div class="group flex flex-col gap-8">
+                    <div class="relative aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl transition-all duration-500">
+                        <img src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <button onclick="addToCart(2, 'Cappotto en Laine Toscane', 35000, 'public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg')" class="absolute bottom-8 right-8 w-16 h-16 bg-alabaster text-carbon rounded-full shadow-3xl flex items-center justify-center text-xl opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-ruby-red hover:text-white">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="text-purple font-black uppercase text-[10px] tracking-widest">Vêtements</span>
-                        </div>
-                        <a href="product-2.html"><h3 class="text-2xl font-bold text-very-dark-purple hover:text-purple transition">Manteau d'Hiver Élégant</h3></a>
-                        <p class="text-2xl font-black text-very-dark-purple tracking-tighter mt-2">35 000 DZD</p>
+                    <div class="text-center">
+                        <span class="text-ruby-red font-black uppercase text-[10px] tracking-[0.4em] mb-4 block">Manteau</span>
+                        <a href="product-2.html"><h3 class="text-2xl font-luxury font-black text-alabaster hover:text-ruby-red transition tracking-tighter">Cappotto en Laine Toscane</h3></a>
+                        <p class="text-2xl font-black text-alabaster tracking-tighter mt-4">35 000 DZD</p>
+                    </div>
+                </div>
+
+                <!-- Produit 3 -->
+                <div class="group flex flex-col gap-8">
+                    <div class="relative aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl transition-all duration-500">
+                        <img src="public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <button onclick="addToCart(3, 'Pantalon Sartorial Noir', 18200, 'public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg')" class="absolute bottom-8 right-8 w-16 h-16 bg-alabaster text-carbon rounded-full shadow-3xl flex items-center justify-center text-xl opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-ruby-red hover:text-white">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-ruby-red font-black uppercase text-[10px] tracking-[0.4em] mb-4 block">Pantalon</span>
+                        <a href="product-3.html"><h3 class="text-2xl font-luxury font-black text-alabaster hover:text-ruby-red transition tracking-tighter">Pantalon Sartorial Noir</h3></a>
+                        <p class="text-2xl font-black text-alabaster tracking-tighter mt-4">18 200 DZD</p>
                     </div>
                 </div>
             </div>
 
             <!-- Pagination -->
-            <div class="mt-24 flex justify-center gap-4">
-                <button class="w-14 h-14 rounded-2xl bg-purple text-white font-bold shadow-lg shadow-purple/20">1</button>
-                <button class="w-14 h-14 rounded-2xl bg-white border-2 border-neutral-100 font-bold hover:border-purple transition">2</button>
-                <button class="w-14 h-14 rounded-2xl bg-white border-2 border-neutral-100 font-bold hover:border-purple transition">3</button>
-                <button class="w-14 h-14 rounded-2xl bg-white border-2 border-neutral-100 font-bold hover:border-purple transition flex items-center justify-center"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="mt-32 flex justify-center gap-6">
+                <button class="w-16 h-16 rounded-xl bg-ruby-red text-white font-black shadow-2xl">1</button>
+                <button class="w-16 h-16 rounded-xl bg-white/5 border border-white/10 font-black hover:border-ruby-red transition uppercase tracking-widest text-[10px]">2</button>
+                <button class="w-16 h-16 rounded-xl bg-white/5 border border-white/10 font-black hover:border-ruby-red transition flex items-center justify-center"><i class="fa-solid fa-chevron-right text-xs"></i></button>
             </div>
         </div>
     </main>
 
-    <!-- FOOTER (Shared) -->
-    <footer class="bg-white border-t border-purple/10 py-24 text-center">
-        <p class="font-black text-very-dark-purple tracking-[0.3em] uppercase mb-8">Rumusha Boutique</p>
-        <div class="flex justify-center gap-8 mb-12">
-            <a href="#" class="text-neutral-400 hover:text-purple transition"><i class="fa-brands fa-instagram text-2xl"></i></a>
-            <a href="#" class="text-neutral-400 hover:text-purple transition"><i class="fa-brands fa-facebook text-2xl"></i></a>
+    <!-- FOOTER -->
+    <footer class="bg-carbon pt-32 pb-12 px-8 lg:px-16 border-t border-white/5">
+        <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-24 mb-24">
+            <div class="col-span-1 md:col-span-1">
+                <a href="#" class="font-luxury text-4xl font-black mb-8 block uppercase tracking-tighter">caba_italie2</a>
+                <p class="text-alabaster/40 font-medium leading-relaxed mb-12 italic">L'excellence de la couture italienne rencontre l'innovation du design moderne. Créé à Milan, porté dans le monde entier.</p>
+                <div class="flex gap-10">
+                    <a href="#" class="text-2xl hover:text-ruby-red transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-2xl hover:text-ruby-red transition"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+            
+            <div class="space-y-10">
+                <h4 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf">Boutique</h4>
+                <ul class="space-y-4 font-bold text-xs text-alabaster/40 uppercase tracking-widest">
+                    <li><a href="search.html" class="hover:text-ruby-red transition">Collection</a></li>
+                    <li><a href="index.html" class="hover:text-ruby-red transition">Accueil</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-10">
+                <h4 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf">Assistance</h4>
+                <ul class="space-y-4 font-bold text-xs text-alabaster/40 uppercase tracking-widest">
+                    <li><a href="#" class="hover:text-ruby-red transition">Livraison</a></li>
+                    <li><a href="#" class="hover:text-ruby-red transition">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-12">
+                <h4 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf">Newsletter</h4>
+                <form class="flex border-b border-white/20 pb-4">
+                    <input type="email" placeholder="Votre email" class="bg-transparent flex-1 outline-none text-xs font-black placeholder:opacity-20 uppercase tracking-widest">
+                    <button class="text-ruby-red hover:text-alabaster transition"><i class="fa-solid fa-arrow-right-long"></i></button>
+                </form>
+            </div>
         </div>
-        <p class="text-sm text-neutral-400">© 2024 Rumusha - Site Statique Professionnel</p>
+        
+        <div class="max-w-[1600px] mx-auto pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-black uppercase tracking-[0.3em] text-alabaster/20">
+            <p>© 2024 caba_italie2. Création Italienne.</p>
+        </div>
     </footer>
 
     <script>
         let cart = JSON.parse(localStorage.getItem('rumusha_cart')) || [];
         function updateBadge() {
             const count = cart.reduce((acc, item) => acc + item.qty, 0);
-            document.getElementById('cart-count-badge').textContent = count;
-            document.getElementById('cart-count-sidebar').textContent = count;
+            document.querySelectorAll('#cart-count-badge').forEach(el => el.textContent = count);
+            document.querySelectorAll('#cart-count-sidebar').forEach(el => el.textContent = count);
         }
         function toggleCart() {
             document.getElementById('cart-sidebar').classList.toggle('closed');
@@ -215,11 +255,29 @@
             cart.forEach(item => {
                 total += item.price * item.qty;
                 const row = document.createElement('div');
-                row.className = 'cart-item-row flex gap-4 bg-neutral-50 p-4 rounded-2xl border border-neutral-100 mb-4';
-                row.innerHTML = `<div class="w-16 h-20 rounded-xl overflow-hidden bg-white shadow-sm"><img src="${item.img}" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold text-sm">${item.title}</h3><p class="text-purple font-black mt-2">${item.price.toLocaleString()} DZD</p></div>`;
+                row.className = 'cart-item-row flex gap-6 bg-black/5 p-6 rounded-2xl border border-black/10 transition hover:bg-black/10 mb-4';
+                row.innerHTML = `
+                    <div class="w-20 h-24 rounded-xl overflow-hidden shadow-sm bg-white border border-black/5"><img src="${item.img}" class="w-full h-full object-cover"></div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-black text-xs uppercase tracking-tighter">${item.title}</h3>
+                            <button onclick="removeFromCart(${item.id})" class="text-neutral-400 hover:text-ruby-red transition"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <span class="text-[10px] font-black text-ruby-red uppercase tracking-widest">${item.qty} x ${item.price.toLocaleString()} DZD</span>
+                            <p class="font-black text-xl tracking-tighter">${(item.price * item.qty).toLocaleString()} DZD</p>
+                        </div>
+                    </div>
+                `;
                 container.appendChild(row);
             });
             totalEl.textContent = total.toLocaleString() + " DZD";
+        }
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('rumusha_cart', JSON.stringify(cart));
+            updateBadge();
+            renderCart();
         }
         updateBadge();
     </script>

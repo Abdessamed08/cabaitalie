@@ -3,102 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produit - Rumusha</title>
+    <title>Manteau d'Hiver Élégant - caba_italie2</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --purple: #9333ea;
-            --dark-purple: #581c87;
-            --very-dark-purple: #2d1b4d;
+            --emerald-dark: #1B3022;
+            --ruby-red: #9B1B30;
+            --alabaster: #F2F0E9;
+            --gold-leaf: #C5A059;
+            --carbon: #0D130E;
         }
-        body { font-family: 'Inter', sans-serif; }
-        .font-lora { font-family: 'Lora', serif; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--emerald-dark);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(155, 27, 48, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(197, 160, 89, 0.08) 0%, transparent 50%),
+                url("https://www.transparenttextures.com/patterns/black-linen.png");
+            color: var(--alabaster);
+            overflow-x: hidden; 
+        }
+        .font-luxury { font-family: 'Playfair Display', serif; }
+        
         .btn-buy {
-            background-color: var(--very-dark-purple);
+            background-color: var(--ruby-red);
             color: white;
-            padding: 16px 32px;
-            border-radius: 99px;
-            font-weight: 600;
+            padding: 20px 40px;
+            font-weight: 800;
             width: 100%;
-            transition: all 0.3s;
-            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(155, 27, 48, 0.3);
         }
         .btn-buy:hover {
-            background-color: #1a0f2e;
-            transform: scale(1.02);
+            transform: translateY(-5px);
+            background-color: var(--alabaster);
+            color: var(--emerald-dark);
         }
+
+        .thumb.active { border-color: var(--ruby-red); opacity: 1; transform: scale(1.05); }
+        .thumb { transition: all 0.3s; opacity: 0.5; border: 2px solid transparent; }
+        .thumb:hover { opacity: 0.8; }
+
+        #cart-sidebar { transition: transform 0.6s cubic-bezier(0.82, 0.01, 0.21, 1); background-color: var(--alabaster); color: var(--carbon); }
+        #cart-sidebar.closed { transform: translateX(100%); }
     </style>
 </head>
-<body class="bg-neutral-50 text-black">
+<body>
 
-    <!-- Navigation (Identique à index.html) -->
-    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-purple/20 h-20">
-        <div class="max-w-[1440px] mx-auto h-full flex items-center justify-between px-4 lg:px-12">
-            <a href="index.html" class="flex items-center">
-                <img src="public/images/logo.png" alt="Rumusha" class="h-10 md:h-12">
+    <!-- PANIER (SIDEBAR) -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[500px] z-[100] shadow-2xl flex flex-col closed">
+        <div class="p-8 border-b border-black/10 flex justify-between items-center">
+            <h2 class="text-3xl font-luxury font-black uppercase tracking-tighter">Votre Panier (<span id="cart-count-sidebar">0</span>)</h2>
+            <button onclick="toggleCart()" class="text-4xl hover:text-ruby-red transition">&times;</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-8 space-y-6">
+            <div id="empty-cart-msg" class="h-full flex flex-col items-center justify-center text-neutral-400 gap-6">
+                <i class="fa-solid fa-bag-shopping text-7xl opacity-10"></i>
+                <p class="text-xl font-luxury italic">Votre panier est encore vide</p>
+                <button onclick="toggleCart()" class="text-ruby-red font-black uppercase tracking-widest text-xs border-b-2 border-ruby-red pb-1">Continuer vos achats</button>
+            </div>
+        </div>
+        <div class="p-8 bg-black/5 border-t border-black/10">
+            <div class="flex justify-between text-2xl font-black mb-8 uppercase tracking-tighter">
+                <span>Total</span>
+                <span id="cart-total" class="text-ruby-red">0 DZD</span>
+            </div>
+            <button class="w-full bg-carbon text-white py-6 font-black uppercase tracking-[0.3em] text-xs hover:bg-ruby-red transition-all duration-500 shadow-2xl">Passer à la caisse</button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-md z-[90] hidden" onclick="toggleCart()"></div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-carbon/95 backdrop-blur-xl border-b border-gold-leaf/20 h-24">
+        <div class="max-w-[1600px] mx-auto h-full flex items-center justify-between px-8 lg:px-16">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <i class="fa-solid fa-arrow-left text-gold-leaf group-hover:-translate-x-2 transition"></i>
+                <span class="font-luxury text-3xl font-black uppercase tracking-tighter text-alabaster">caba_italie2</span>
             </a>
-            <div class="flex items-center gap-4">
-                <a href="index.html" class="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-black">Retour</a>
+            <div class="flex items-center gap-10">
+                <button onclick="toggleCart()" class="relative group">
+                    <div class="relative">
+                        <i class="fa-solid fa-shopping-bag text-2xl text-alabaster group-hover:text-ruby-red transition"></i>
+                        <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-ruby-red text-alabaster text-[9px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-xl border-2 border-carbon">0</span>
+                    </div>
+                </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Détail Produit -->
-    <main class="max-w-[1440px] mx-auto py-12 px-4 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-12">
-        <!-- Galerie Images -->
-        <div class="space-y-4">
-            <div class="aspect-[4/5] rounded-3xl overflow-hidden bg-neutral-100 shadow-xl">
-                <img src="public/images/screenshots/home.webp" alt="Produit" class="w-full h-full object-cover">
-            </div>
-            <div class="grid grid-cols-4 gap-4">
-                <div class="aspect-square rounded-xl overflow-hidden bg-neutral-200 border-2 border-purple">
-                    <img src="public/images/screenshots/home.webp" alt="Produit" class="w-full h-full object-cover">
+    <!-- DETAIL PRODUIT -->
+    <main class="max-w-[1600px] mx-auto py-20 px-8 lg:px-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+            <!-- Galerie -->
+            <div class="space-y-8">
+                <div class="aspect-[4/5] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-3xl relative group">
+                    <img id="main-img" src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" alt="Produit" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                    <div class="absolute top-8 right-8">
+                        <button class="w-14 h-14 bg-alabaster/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-ruby-red transition-all duration-500">
+                            <i class="fa-regular fa-heart text-xl"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="aspect-square rounded-xl overflow-hidden bg-neutral-200 hover:opacity-80 cursor-pointer">
-                    <img src="public/images/promotions/winter.jpg" alt="Produit" class="w-full h-full object-cover">
-                </div>
-            </div>
-        </div>
-
-        <!-- Infos Produit -->
-        <div class="flex flex-col gap-8">
-            <div>
-                <h1 class="font-lora text-4xl md:text-5xl font-bold text-[#2d1b4d]">Chemise Kimono Moderne</h1>
-                <p class="text-2xl font-semibold mt-4">12 500 DZD</p>
-            </div>
-
-            <div class="space-y-4">
-                <h3 class="font-bold text-sm uppercase tracking-widest text-neutral-500">Taille</h3>
-                <div class="flex gap-3">
-                    <button class="w-12 h-12 rounded-full border-2 border-purple flex items-center justify-center font-bold">S</button>
-                    <button class="w-12 h-12 rounded-full border border-neutral-300 flex items-center justify-center font-bold hover:border-black">M</button>
-                    <button class="w-12 h-12 rounded-full border border-neutral-300 flex items-center justify-center font-bold hover:border-black">L</button>
+                <div class="grid grid-cols-4 gap-6">
+                    <img onclick="changeImg(this)" src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="thumb active aspect-square rounded-2xl overflow-hidden cursor-pointer object-cover">
                 </div>
             </div>
 
-            <div class="space-y-4 text-neutral-600 leading-relaxed">
-                <h3 class="font-bold text-sm uppercase tracking-widest text-neutral-500">Description</h3>
-                <p>
-                    Une pièce unique alliant la tradition japonaise et le confort moderne. Fabriquée en coton de haute qualité, cette chemise kimono est idéale pour un look élégant et décontracté.
-                </p>
-                <ul class="list-disc pl-5 space-y-2 mt-4">
-                    <li>Coton 100% biologique</li>
-                    <li>Coupe unisexe</li>
-                    <li>Détails brodés à la main</li>
-                </ul>
-            </div>
+            <!-- Infos -->
+            <div class="flex flex-col pt-4">
+                <nav class="flex text-[10px] font-black uppercase tracking-[0.4em] text-gold-leaf/60 gap-4 mb-10">
+                    <a href="index.html" class="hover:text-ruby-red transition">Home</a>
+                    <span>/</span>
+                    <a href="search.html" class="hover:text-ruby-red transition">Collection</a>
+                    <span>/</span>
+                    <span class="text-alabaster">Manteau d'Hiver Élégant</span>
+                </nav>
 
-            <div class="pt-8">
-                <button class="btn-buy">Ajouter au Panier</button>
+                <h1 class="font-luxury text-6xl md:text-8xl font-black text-alabaster mb-8 leading-[0.9] tracking-tighter">Manteau <br><span class="italic">d'Hiver Élégant</span></h1>
+                
+                <div class="flex items-center gap-10 mb-12">
+                    <p class="text-5xl font-black text-ruby-red tracking-tighter">35 000 DZD</p>
+                    <div class="flex items-center gap-3 bg-emerald-dark border border-white/10 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em]">
+                        <span class="w-2 h-2 rounded-full bg-ruby-red animate-pulse"></span> Fait à la Main
+                    </div>
+                </div>
+
+                <div class="flex text-gold-leaf gap-2 mb-12 items-center">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <span class="text-white/40 text-xs font-bold ml-4 tracking-widest uppercase">(24 avis de la boutique)</span>
+                </div>
+
+                <!-- Sélecteurs -->
+                <div class="space-y-12 mb-16">
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-end">
+                            <h3 class="font-black text-xs uppercase tracking-[0.3em] text-gold-leaf">Choisir la Taille</h3>
+                            <button class="text-[10px] font-black text-alabaster/40 underline uppercase tracking-widest hover:text-ruby-red transition">Guide Milan</button>
+                        </div>
+                        <div class="flex gap-4">
+                            <button onclick="selectSize(this)" class="size-btn w-16 h-16 rounded-xl border border-white/10 flex items-center justify-center font-black text-lg hover:border-ruby-red transition-all">S</button>
+                            <button onclick="selectSize(this)" class="size-btn w-16 h-16 rounded-xl border-2 border-ruby-red bg-ruby-red/10 flex items-center justify-center font-black text-lg transition-all">M</button>
+                            <button onclick="selectSize(this)" class="size-btn w-16 h-16 rounded-xl border border-white/10 flex items-center justify-center font-black text-lg hover:border-ruby-red transition-all">L</button>
+                            <button onclick="selectSize(this)" class="size-btn w-16 h-16 rounded-xl border border-white/10 flex items-center justify-center font-black text-lg hover:border-ruby-red transition-all">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h3 class="font-black text-xs uppercase tracking-[0.3em] text-gold-leaf">Quantité</h3>
+                        <div class="flex items-center gap-8 bg-white/5 border border-white/10 w-fit p-2 rounded-xl">
+                            <button onclick="updatePageQty(-1)" class="w-12 h-12 rounded-lg hover:bg-ruby-red transition flex items-center justify-center text-xl"><i class="fa-solid fa-minus"></i></button>
+                            <span id="page-qty" class="text-2xl font-black w-10 text-center">1</span>
+                            <button onclick="updatePageQty(1)" class="w-12 h-12 rounded-lg hover:bg-ruby-red transition flex items-center justify-center text-xl"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                    <button onclick="addCurrentToCart()" class="btn-buy">
+                        <i class="fa-solid fa-shopping-cart"></i> Ajouter au Panier
+                    </button>
+                </div>
+
+                <!-- Accordéon Détails -->
+                <div class="mt-24 border-t border-white/10 pt-12 space-y-10">
+                    <div class="group cursor-pointer">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-black text-sm uppercase tracking-[0.3em] text-alabaster">Excellence en Laine</h3>
+                            <i class="fa-solid fa-plus text-xs transition group-hover:rotate-45 text-gold-leaf"></i>
+                        </div>
+                        <p class="text-alabaster/60 leading-relaxed font-medium italic">
+                            Un manteau structuré, conçu pour braver le froid avec une élégance absolue. La laine toscane offre une isolation thermique supérieure tout en restant légère.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer Simple -->
-    <footer class="mt-24 border-t py-12 text-center text-neutral-400 text-sm">
-        <p>© 2024 Rumusha - Site de Démonstration</p>
+    <!-- FOOTER -->
+    <footer class="bg-carbon pt-32 pb-12 px-8 lg:px-16 border-t border-white/5 mt-32">
+        <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-24 mb-24">
+            <div class="col-span-1 md:col-span-1">
+                <a href="#" class="font-luxury text-4xl font-black mb-8 block uppercase tracking-tighter">caba_italie2</a>
+                <p class="text-alabaster/40 font-medium leading-relaxed mb-12 italic">L'excellence de la couture italienne rencontre l'innovation du design moderne. Créé à Milan, porté dans le monde entier.</p>
+                <div class="flex gap-10">
+                    <a href="#" class="text-2xl hover:text-ruby-red transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-2xl hover:text-ruby-red transition"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+            
+            <div class="space-y-10">
+                <h4 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf">Boutique</h4>
+                <ul class="space-y-4 font-bold text-xs text-alabaster/40 uppercase tracking-widest">
+                    <li><a href="search.html" class="hover:text-ruby-red transition">Collection</a></li>
+                    <li><a href="search.html" class="hover:text-ruby-red transition">Nouveautés</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-10">
+                <h4 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf">Assistance</h4>
+                <ul class="space-y-4 font-bold text-xs text-alabaster/40 uppercase tracking-widest">
+                    <li><a href="#" class="hover:text-ruby-red transition">Livraison</a></li>
+                    <li><a href="#" class="hover:text-ruby-red transition">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-12">
+                <h4 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf">Newsletter</h4>
+                <form class="flex border-b border-white/20 pb-4">
+                    <input type="email" placeholder="Votre email" class="bg-transparent flex-1 outline-none text-xs font-black placeholder:opacity-20 uppercase tracking-widest">
+                    <button class="text-ruby-red hover:text-alabaster transition"><i class="fa-solid fa-arrow-right-long"></i></button>
+                </form>
+            </div>
+        </div>
     </footer>
 
+    <script>
+        let cart = JSON.parse(localStorage.getItem('rumusha_cart')) || [];
+        let currentQty = 1;
+
+        function updatePageQty(delta) {
+            currentQty += delta;
+            if(currentQty < 1) currentQty = 1;
+            document.getElementById('page-qty').textContent = currentQty;
+        }
+
+        function changeImg(el) {
+            document.getElementById('main-img').src = el.src;
+            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function selectSize(btn) {
+            document.querySelectorAll('.size-btn').forEach(b => {
+                b.classList.remove('border-ruby-red', 'bg-ruby-red/10');
+                b.classList.add('border-white/10');
+            });
+            btn.classList.add('border-ruby-red', 'bg-ruby-red/10');
+            btn.classList.remove('border-white/10');
+        }
+
+        function addCurrentToCart() {
+            const title = "Manteau d'Hiver Élégant";
+            const price = 35000;
+            const img = document.getElementById('main-img').src;
+            
+            const existing = cart.find(item => item.id === 2);
+            if(existing) {
+                existing.qty += currentQty;
+            } else {
+                cart.push({ id: 2, title, price, img, qty: currentQty });
+            }
+            saveCart();
+            updateBadge();
+            toggleCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('closed');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
+            renderCart();
+        }
+        function saveCart() { localStorage.setItem('rumusha_cart', JSON.stringify(cart)); }
+        function updateBadge() {
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.querySelectorAll('#cart-count-badge').forEach(el => el.textContent = count);
+            document.querySelectorAll('#cart-count-sidebar').forEach(el => el.textContent = count);
+        }
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+            if(cart.length === 0) {
+                emptyMsg.style.display = 'flex';
+                container.querySelectorAll('.cart-item-row').forEach(el => el.remove());
+                totalEl.textContent = "0 DZD";
+                return;
+            }
+            emptyMsg.style.display = 'none';
+            container.querySelectorAll('.cart-item-row').forEach(el => el.remove());
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                const row = document.createElement('div');
+                row.className = 'cart-item-row flex gap-6 bg-black/5 p-6 rounded-2xl border border-black/10 transition hover:bg-black/10';
+                row.innerHTML = `
+                    <div class="w-20 h-24 rounded-xl overflow-hidden shadow-sm bg-white border border-black/5"><img src="${item.img}" class="w-full h-full object-cover"></div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-black text-xs uppercase tracking-tighter">${item.title}</h3>
+                            <button onclick="removeFromCart(${item.id})" class="text-neutral-400 hover:text-ruby-red transition"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <span class="text-[10px] font-black text-ruby-red uppercase tracking-widest">${item.qty} x ${item.price.toLocaleString()} DZD</span>
+                            <p class="font-black text-xl tracking-tighter">${(item.price * item.qty).toLocaleString()} DZD</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+            totalEl.textContent = total.toLocaleString() + " DZD";
+        }
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            updateBadge();
+            renderCart();
+        }
+        updateBadge();
+    </script>
 </body>
 </html>
