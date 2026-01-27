@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemise Kimono Moderne - Rumusha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --purple: #9333ea;
+            --dark-purple: #581c87;
+            --very-dark-purple: #2d1b4d;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-lora { font-family: 'Lora', serif; }
+        
+        .btn-buy {
+            background-color: var(--very-dark-purple);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 99px;
+            font-weight: 700;
+            width: 100%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .btn-buy:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(45, 27, 77, 0.25);
+            background-color: #1a0f2e;
+        }
+
+        .thumb.active { border-color: var(--purple); opacity: 1; transform: scale(1.05); }
+        .thumb { transition: all 0.3s; opacity: 0.6; }
+
+        /* Cart Sidebar (Same as index) */
+        #cart-sidebar { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        #cart-sidebar.closed { transform: translateX(100%); }
+    </style>
+</head>
+<body class="bg-neutral-50 text-black">
+
+    <!-- PANIER (SIDEBAR) -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[450px] bg-white z-[100] shadow-2xl flex flex-col closed">
+        <div class="p-6 border-b flex justify-between items-center">
+            <h2 class="text-2xl font-bold font-lora text-very-dark-purple">Votre Panier (<span id="cart-count-sidebar">0</span>)</h2>
+            <button onclick="toggleCart()" class="text-3xl hover:text-purple transition">&times;</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
+            <div id="empty-cart-msg" class="h-full flex flex-col items-center justify-center text-neutral-400 gap-4">
+                <i class="fa-solid fa-cart-shopping text-6xl opacity-20"></i>
+                <p class="text-lg">Votre panier est encore vide</p>
+                <button onclick="toggleCart()" class="text-purple font-bold hover:underline">Continuer vos achats</button>
+            </div>
+        </div>
+        <div class="p-6 border-t bg-neutral-50">
+            <div class="flex justify-between text-xl font-bold mb-6">
+            <span>Total</span>
+            <span id="cart-total">0 DZD</span>
+        </div>
+            <button class="w-full bg-very-dark-purple text-white py-4 rounded-full font-bold text-lg hover:bg-black transition">Passer à la caisse</button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] hidden" onclick="toggleCart()"></div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-purple/10 h-20">
+        <div class="max-w-[1440px] mx-auto h-full flex items-center justify-between px-6 lg:px-12">
+            <a href="index.html" class="flex items-center hover:scale-105 transition">
+                <img src="public/images/logo.png" alt="Rumusha" class="h-10 md:h-12">
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="text-sm font-black uppercase tracking-widest text-neutral-400 hover:text-purple transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Retour
+                </a>
+                <button onclick="toggleCart()" class="relative group">
+                    <i class="fa-solid fa-bag-shopping text-2xl group-hover:text-purple transition"></i>
+                    <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-purple text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-lg border-2 border-white">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- DETAIL PRODUIT -->
+    <main class="max-w-[1440px] mx-auto py-12 md:py-20 px-6 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+            <!-- Galerie -->
+            <div class="space-y-6">
+                <div class="aspect-[4/5] rounded-[40px] overflow-hidden bg-neutral-100 shadow-2xl relative group">
+                    <img id="main-img" src="public/images/screenshots/home.webp" alt="Produit" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute top-6 right-6">
+                        <button class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg text-neutral-400 hover:text-red-500 transition">
+                            <i class="fa-regular fa-heart text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-4 gap-4 px-2">
+                    <img onclick="changeImg(this)" src="public/images/screenshots/home.webp" class="thumb active aspect-square rounded-2xl overflow-hidden cursor-pointer object-cover border-2 border-transparent">
+                    <img onclick="changeImg(this)" src="public/images/promotions/winter.jpg" class="thumb aspect-square rounded-2xl overflow-hidden cursor-pointer object-cover border-2 border-transparent">
+                </div>
+            </div>
+
+            <!-- Infos -->
+            <div class="flex flex-col">
+                <nav class="flex text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 gap-2 mb-6">
+                    <a href="index.html" class="hover:text-purple">Home</a>
+                    <span>/</span>
+                    <a href="search.html?cat=clothing" class="hover:text-purple">Vêtements</a>
+                    <span>/</span>
+                    <span class="text-purple">Chemise Kimono Moderne</span>
+                </nav>
+
+                <h1 class="font-lora text-5xl md:text-6xl font-bold text-very-dark-purple mb-4 leading-tight">Chemise Kimono Moderne</h1>
+                
+                <div class="flex items-center gap-6 mb-8">
+                    <p class="text-4xl font-black text-very-dark-purple tracking-tighter">12 500 DZD</p>
+                    <div class="flex items-center gap-2 bg-green-50 text-green-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span> En Stock
+                    </div>
+                </div>
+
+                <div class="flex text-yellow-400 gap-1 mb-8 items-center">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <span class="text-neutral-400 text-sm font-bold ml-3">(48 avis clients)</span>
+                </div>
+
+                <!-- Sélecteurs -->
+                <div class="space-y-10 mb-12">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <h3 class="font-black text-sm uppercase tracking-widest text-very-dark-purple">Choisir la Taille</h3>
+                            <button class="text-xs font-bold text-purple underline uppercase tracking-widest hover:text-very-dark-purple transition">Guide des tailles</button>
+                        </div>
+                        <div class="flex gap-4">
+                            <button onclick="selectSize(this)" class="size-btn w-14 h-14 rounded-2xl border-2 border-neutral-100 flex items-center justify-center font-bold text-lg hover:border-purple transition-all">S</button>
+                            <button onclick="selectSize(this)" class="size-btn w-14 h-14 rounded-2xl border-2 border-purple bg-purple/5 flex items-center justify-center font-bold text-lg transition-all">M</button>
+                            <button onclick="selectSize(this)" class="size-btn w-14 h-14 rounded-2xl border-2 border-neutral-100 flex items-center justify-center font-bold text-lg hover:border-purple transition-all">L</button>
+                            <button onclick="selectSize(this)" class="size-btn w-14 h-14 rounded-2xl border-2 border-neutral-100 flex items-center justify-center font-bold text-lg hover:border-purple transition-all">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="font-black text-sm uppercase tracking-widest text-very-dark-purple">Quantité</h3>
+                        <div class="flex items-center gap-6 bg-white border-2 border-neutral-100 w-fit p-2 rounded-full shadow-sm">
+                            <button onclick="updatePageQty(-1)" class="w-10 h-10 rounded-full hover:bg-neutral-50 transition"><i class="fa-solid fa-minus"></i></button>
+                            <span id="page-qty" class="text-xl font-black w-8 text-center">1</span>
+                            <button onclick="updatePageQty(1)" class="w-10 h-10 rounded-full hover:bg-neutral-50 transition"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <button onclick="addCurrentToCart()" class="btn-buy">
+                        <i class="fa-solid fa-bag-shopping"></i> Ajouter au Panier
+                    </button>
+                    <p class="text-center text-sm font-medium text-neutral-400">Paiement 100% sécurisé via SSL</p>
+                </div>
+
+                <!-- Accordéon Détails -->
+                <div class="mt-16 border-t border-neutral-100 pt-10 space-y-8">
+                    <div class="group cursor-pointer">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-black text-lg uppercase tracking-wider text-very-dark-purple">Description & Matière</h3>
+                            <i class="fa-solid fa-plus text-sm transition group-hover:rotate-45"></i>
+                        </div>
+                        <p class="text-neutral-500 leading-relaxed text-lg">
+                            Cette pièce emblématique redéfinit le kimono traditionnel pour la garde-robe moderne. Fabriquée dans un coton japonais d'une douceur exceptionnelle, elle présente une coupe fluide et des détails minimalistes. 
+                        </p>
+                    </div>
+                    <div class="group cursor-pointer border-t border-neutral-100 pt-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-black text-lg uppercase tracking-wider text-very-dark-purple">Entretien</h3>
+                            <i class="fa-solid fa-plus text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- PRODUITS SIMILAIRES -->
+    <section class="bg-white py-24 border-t border-neutral-100">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <h2 class="text-4xl font-lora font-bold mb-16 text-center">Vous aimerez aussi</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <a href="product-2.html" class="group flex flex-col gap-4">
+                    <div class="aspect-[3/4] rounded-[30px] overflow-hidden bg-neutral-50 shadow-sm transition hover:shadow-xl">
+                        <img src="public/images/promotions/winter.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-1 group-hover:text-purple transition">Manteau d'Hiver Élégant</h4>
+                        <p class="font-black text-neutral-400">35 000 DZD</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Same as index) -->
+    <footer class="bg-very-dark-purple text-white py-12 px-12 text-center">
+        <p class="font-lora italic text-xl mb-4">Rumusha - L'art de vivre à la japonaise.</p>
+        <p class="text-sm opacity-40">© 2024 Rumusha. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('rumusha_cart')) || [];
+        let currentQty = 1;
+
+        function updatePageQty(delta) {
+            currentQty += delta;
+            if(currentQty < 1) currentQty = 1;
+            document.getElementById('page-qty').textContent = currentQty;
+        }
+
+        function changeImg(el) {
+            document.getElementById('main-img').src = el.src;
+            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function selectSize(btn) {
+            document.querySelectorAll('.size-btn').forEach(b => {
+                b.classList.remove('border-purple', 'bg-purple/5');
+                b.classList.add('border-neutral-100');
+            });
+            btn.classList.add('border-purple', 'bg-purple/5');
+            btn.classList.remove('border-neutral-100');
+        }
+
+        function addCurrentToCart() {
+            const title = "Chemise Kimono Moderne";
+            const price = 12500;
+            const img = "public/images/screenshots/home.webp";
+            
+            const existing = cart.find(item => item.id === 1);
+            if(existing) {
+                existing.qty += currentQty;
+            } else {
+                cart.push({ id: 1, title, price, img, qty: currentQty });
+            }
+            saveCart();
+            updateBadge();
+            toggleCart();
+        }
+
+        // Shared Cart Functions
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('closed');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
+            renderCart();
+        }
+        function saveCart() { localStorage.setItem('rumusha_cart', JSON.stringify(cart)); }
+        function updateBadge() {
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.getElementById('cart-count-badge').textContent = count;
+            document.getElementById('cart-count-sidebar').textContent = count;
+        }
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+            if(cart.length === 0) {
+                emptyMsg.style.display = 'flex';
+                container.querySelectorAll('.cart-item-row').forEach(el => el.remove());
+                totalEl.textContent = "0 DZD";
+                return;
+            }
+            emptyMsg.style.display = 'none';
+            container.querySelectorAll('.cart-item-row').forEach(el => el.remove());
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                const row = document.createElement('div');
+                row.className = 'cart-item-row flex gap-4 bg-neutral-50 p-4 rounded-2xl border border-neutral-100';
+                row.innerHTML = `
+                    <div class="w-16 h-20 rounded-xl overflow-hidden shadow-sm bg-white"><img src="${item.img}" class="w-full h-full object-cover"></div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-sm">${item.title}</h3>
+                            <button onclick="removeFromCart(${item.id})" class="text-neutral-400 hover:text-red-500"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <span class="text-xs font-black text-purple">${item.qty} x ${item.price.toLocaleString()} DZD</span>
+                            <p class="font-black text-very-dark-purple">${(item.price * item.qty).toLocaleString()} DZD</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+            totalEl.textContent = total.toLocaleString() + " DZD";
+        }
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            updateBadge();
+            renderCart();
+        }
+        updateBadge();
+    </script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>caba_italie2 - L'Élégance Italienne au Quotidien</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --emerald-dark: #1B3022;  /* Vert Italien Profond */
+            --ruby-red: #9B1B30;      /* Rouge Rubis de Luxe */
+            --alabaster: #F2F0E9;     /* Blanc Marbre Noble */
+            --gold-leaf: #C5A059;     /* Touche d'Or */
+            --carbon: #0D130E;        /* Noir organique */
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            /* Background Italien Intelligent : Vert Émeraude avec Texture Pierre */
+            background-color: var(--emerald-dark);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(155, 27, 48, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(197, 160, 89, 0.08) 0%, transparent 50%),
+                url("https://www.transparenttextures.com/patterns/black-linen.png");
+            color: #FFFFFF; /* Revert to white */
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+        }
+
+        /* Amélioration de la clarté des textes */
+        h1, h2, h3 { color: #FFFFFF !important; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        p { color: #E5E1D8 !important; font-weight: 400; }
+        .text-gold { color: #D4AF37 !important; font-weight: 700; }
+        .text-terracotta { color: var(--ruby-red) !important; font-weight: 800; }
+        .text-ruby-red { color: var(--ruby-red) !important; }
+
+        /* Design Tricolore Professionnel */
+        header { 
+            background: rgba(13, 19, 14, 0.95) !important; 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3) !important;
+            backdrop-filter: blur(20px) !important;
+        }
+        .nav-link:hover { color: var(--ruby-red) !important; }
+        .nav-link:after { background-color: var(--ruby-red) !important; }
+
+        .btn-gold {
+            background-color: var(--ruby-red) !important;
+            color: var(--alabaster) !important;
+            border-radius: 0 !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.2em !important;
+            box-shadow: 0 10px 30px rgba(155, 27, 48, 0.3);
+        }
+        .btn-gold:hover {
+            background-color: var(--alabaster) !important;
+            color: var(--emerald-dark) !important;
+            transform: translateY(-5px);
+        }
+
+        .product-card { 
+            background: rgba(255, 255, 255, 0.02) !important;
+            border: 1px solid rgba(242, 240, 233, 0.05) !important;
+        }
+        .product-card:hover {
+            border-color: var(--ruby-red) !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        .text-terracotta { color: var(--ruby-red) !important; }
+        .text-gold { color: var(--gold-leaf) !important; }
+        
+        .bg-cypress { background-color: var(--emerald-dark) !important; }
+        .bg-very-dark-purple { background-color: var(--carbon) !important; }
+        
+        h1, h2, h3 { color: var(--alabaster) !important; }
+        p { color: rgba(242, 240, 233, 0.7) !important; }
+
+        .tab-button {
+            position: relative;
+            transition: opacity 0.3s;
+        }
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--ruby-red);
+            transition: width 0.3s ease;
+        }
+        .tab-button.active::after, .tab-button:hover::after {
+            width: 100%;
+        }
+
+        /* Effet spécial sur le logo */
+        .header-logo {
+            filter: drop-shadow(0 0 5px rgba(155, 27, 48, 0.2));
+        }
+        .font-luxury { font-family: 'Playfair Display', serif; }
+        
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(1.05); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .hero-animate { animation: fadeInScale 2s ease-out; }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: inline-flex; white-space: nowrap; animation: marquee 30s linear infinite;
+        }
+
+        .nav-link { 
+            position: relative; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; font-size: 0.75rem; transition: all 0.3s;
+        }
+        .nav-link:after {
+            content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0;
+            background-color: var(--gold); transition: width 0.3s;
+        }
+        .nav-link:hover:after { width: 100%; }
+        .nav-link:hover { color: var(--gold); }
+
+        .btn-luxury {
+            background-color: var(--cypress); color: white; padding: 16px 40px;
+            font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+            transition: all 0.4s; display: inline-block; border: 1px solid var(--cypress);
+        }
+        .btn-luxury:hover {
+            background-color: transparent; color: var(--cypress);
+            box-shadow: inset 0 0 0 1px var(--cypress); transform: translateY(-3px);
+        }
+
+        .btn-gold {
+            background-color: var(--gold); color: white; padding: 16px 40px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; transition: all 0.4s;
+        }
+        .btn-gold:hover { background-color: var(--carbon); transform: translateY(-3px); }
+
+        .product-card { background: white; transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
+        .product-card:hover { box-shadow: 0 30px 60px rgba(0,0,0,0.05); transform: translateY(-10px); }
+
+        /* Animations d'appel à l'action */
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(155, 27, 48, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(155, 27, 48, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(155, 27, 48, 0); }
+        }
+        .btn-pulse { animation: pulse-red 2s infinite; }
+
+        @keyframes bounce-x {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+        .animate-bounce-x { animation: bounce-x 1s infinite; }
+
+        #cart-sidebar { transition: transform 0.6s cubic-bezier(0.82, 0.01, 0.21, 1); background-color: var(--marble); }
+        #cart-sidebar.closed { transform: translateX(100%); }
+
+        .text-outline { color: transparent; -webkit-text-stroke: 1px rgba(180, 151, 90, 0.3); }
+    </style>
+</head>
+<body>
+
+    <!-- PANIER -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[500px] z-[100] shadow-2xl flex flex-col closed">
+        <div class="p-8 border-b border-gold/20 flex justify-between items-center bg-white">
+            <h2 class="text-3xl font-luxury font-bold italic">Mon Panier</h2>
+            <button onclick="toggleCart()" class="text-2xl hover:text-gold transition"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-8 space-y-8">
+            <div id="empty-cart-msg" class="h-full flex flex-col items-center justify-center text-neutral-400 gap-6">
+                <i class="fa-solid fa-bag-shopping text-7xl opacity-10"></i>
+                <p class="font-luxury text-xl italic">Votre panier est vide</p>
+                <button onclick="toggleCart()" class="border-b border-gold text-gold font-bold py-2 tracking-widest uppercase text-xs">Découvrir la collection</button>
+            </div>
+        </div>
+        <div class="p-8 bg-white border-t border-gold/20">
+            <div class="flex justify-between text-2xl font-luxury mb-8">
+                <span>Total</span>
+                <span id="cart-total" class="font-bold">0 DZD</span>
+            </div>
+            <button class="w-full btn-luxury text-center">Passer à la caisse</button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-cypress/40 backdrop-blur-sm z-[90] hidden" onclick="toggleCart()"></div>
+
+    <!-- TOP BAR MARQUEE -->
+    <div class="bg-cypress text-gold/80 py-3 overflow-hidden text-[10px] tracking-[0.4em] font-bold uppercase border-b border-gold/20">
+        <div class="animate-marquee">
+            <div class="flex items-center gap-16 px-4">
+                <span>Excellence Italienne</span>
+                <i class="fa-solid fa-star text-[6px]"></i>
+                <span>Fait Main en Italie</span>
+                <i class="fa-solid fa-star text-[6px]"></i>
+                <span>Livraison Gratuite dès 20 000 DZD</span>
+                <i class="fa-solid fa-star text-[6px]"></i>
+                <span>Nouvelle Collection Automne/Hiver</span>
+                <i class="fa-solid fa-star text-[6px]"></i>
+                <span>Style Milanais Contemporain</span>
+                <i class="fa-solid fa-star text-[6px]"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-marble/90 backdrop-blur-xl border-b border-gold/10 h-24 flex items-center">
+        <div class="max-w-[1600px] mx-auto w-full px-8 lg:px-16 flex items-center justify-between">
+            <button class="md:hidden text-2xl" id="mobile-menu-btn"><i class="fa-solid fa-bars-staggered"></i></button>
+
+            <!-- LOGO -->
+            <a href="index.html" class="flex flex-col items-center group">
+                <span class="font-luxury text-4xl font-black tracking-tighter leading-none group-hover:text-gold transition uppercase">caba_italie2</span>
+            </a>
+
+            <!-- NAV -->
+            <nav class="hidden md:flex items-center gap-12">
+                <a href="search.html" class="nav-link">Collection</a>
+                <a href="search.html" class="nav-link">Sur-Mesure</a>
+                <a href="search.html" class="nav-link">Accessoires</a>
+                <a href="search.html" class="nav-link">L'Univers</a>
+            </nav>
+
+            <!-- ACTIONS -->
+            <div class="flex items-center gap-8">
+                <button onclick="toggleSearch()" class="text-xl hover:text-gold transition"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="profile.html" class="text-xl hover:text-gold transition hidden md:block"><i class="fa-regular fa-user"></i></a>
+                <button onclick="toggleCart()" class="relative group flex items-center gap-3">
+                    <div class="flex flex-col items-end hidden lg:flex">
+                        <span class="text-[9px] font-black uppercase tracking-widest opacity-40">Mon Panier</span>
+                        <span id="cart-total-header" class="text-xs font-bold">0 DZD</span>
+                    </div>
+                    <div class="relative">
+                        <i class="fa-solid fa-shopping-bag text-2xl group-hover:text-gold transition"></i>
+                        <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-terracotta text-[#F2F0E9] text-[9px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-xl border-2 border-marble">0</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-[90vh] w-full overflow-hidden bg-cypress flex items-center justify-center">
+        <!-- Fond flou créatif pour les vidéos verticales -->
+        <video id="hero-video-bg" playsinline muted autoplay class="absolute inset-0 h-full w-full object-cover opacity-30 blur-2xl scale-110 pointer-events-none">
+            <source src="public/videos/AQP-UYgRYmYOxtEHeTOWfzKBy3ElhOPqcsszRCcXocfussCvbliSM30-ZaaIVPh21XjPmEnxfWX8aJufVMV2cnnY.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Vidéo principale au format Reel complet -->
+        <video id="hero-video" playsinline muted autoplay class="relative z-10 h-full w-auto max-w-full object-contain shadow-[0_0_100px_rgba(0,0,0,0.5)] hero-animate">
+            <source src="public/videos/AQP-UYgRYmYOxtEHeTOWfzKBy3ElhOPqcsszRCcXocfussCvbliSM30-ZaaIVPh21XjPmEnxfWX8aJufVMV2cnnY.mp4" type="video/mp4">
+        </video>
+
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cypress/60 z-20"></div>
+        
+        <div class="absolute inset-y-0 left-0 flex flex-col justify-center px-8 lg:px-24 max-w-4xl z-30 pointer-events-none">
+            <span class="text-gold font-bold tracking-[0.5em] uppercase text-sm mb-6 animate-pulse">L'Artisanat rencontre le Style</span>
+            <h1 class="text-white text-6xl md:text-[100px] font-luxury font-black leading-[0.85] italic tracking-tighter mb-12">
+                Pureté<br><span class="text-outline text-white/20">Italienne</span>
+            </h1>
+            <div class="flex flex-col sm:flex-row gap-8 items-start pointer-events-auto">
+                <a href="search.html" class="btn-gold shadow-2xl btn-pulse">Découvrir la Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNIVERS CATEGORIES -->
+    <section class="py-32 px-8">
+        <div class="max-w-[1600px] mx-auto">
+            <h2 class="text-5xl md:text-7xl font-luxury font-bold text-center mb-24 uppercase tracking-tighter">Nos Univers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- PULL -->
+                <a href="search.html" class="group relative aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl">
+                    <img src="public/images/cadre4/587630663_17863753971519012_7011408170577514741_n.jpg" alt="Pull" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
+                        <h3 class="text-white text-3xl font-luxury font-bold italic mb-2 uppercase">Pull</h3>
+                        <span class="text-gold font-bold tracking-[0.3em] text-xs uppercase flex items-center gap-2">Découvrir <i class="fa-solid fa-arrow-right-long animate-bounce-x"></i></span>
+                    </div>
+                </a>
+                
+                <!-- CHEMISE -->
+                <a href="search.html" class="group relative aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl">
+                    <img src="public/images/cadre4/588337083_17863754115519012_2397963502552867433_n.jpg" alt="Chemise" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
+                        <h3 class="text-white text-3xl font-luxury font-bold italic mb-2 uppercase">Chemise</h3>
+                        <span class="text-gold font-bold tracking-[0.3em] text-xs uppercase flex items-center gap-2">Découvrir <i class="fa-solid fa-arrow-right-long animate-bounce-x"></i></span>
+                    </div>
+                </a>
+
+                <!-- PANTALON -->
+                <a href="search.html" class="group relative aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl">
+                    <img src="public/images/cadre4/pantalon.webp" alt="Pantalon" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
+                        <h3 class="text-white text-3xl font-luxury font-bold italic mb-2 uppercase">Pantalon</h3>
+                        <span class="text-gold font-bold tracking-[0.3em] text-xs uppercase flex items-center gap-2">Découvrir <i class="fa-solid fa-arrow-right-long animate-bounce-x"></i></span>
+                    </div>
+                </a>
+
+                <!-- VESTE -->
+                <a href="search.html" class="group relative aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl">
+                    <img src="public/images/cadre4/590968109_17864088789519012_3926422638561942573_n.jpg" alt="Veste" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
+                        <h3 class="text-white text-3xl font-luxury font-bold italic mb-2 uppercase">Veste</h3>
+                        <span class="text-gold font-bold tracking-[0.3em] text-xs uppercase flex items-center gap-2">Découvrir <i class="fa-solid fa-arrow-right-long animate-bounce-x"></i></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEST SELLERS -->
+    <section class="py-32 bg-white">
+        <div class="max-w-[1600px] mx-auto px-8 lg:px-16">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
+                <div class="max-w-2xl">
+                    <h2 class="text-6xl md:text-8xl font-luxury font-bold text-terracotta mb-8 tracking-tighter">Nos <br><span class="italic text-terracotta">Classiques</span></h2>
+                    <p class="text-terracotta text-xl font-medium italic opacity-80">"Le style italien ne se voit pas seulement, il se ressent."</p>
+                </div>
+                <div class="flex gap-12 text-sm font-black uppercase tracking-[0.3em] pb-4 border-b border-ruby-red/20">
+                    <button class="tab-button active text-ruby-red" onclick="switchTab(this, 'clothing')">Vêtements</button>
+                    <button class="tab-button text-ruby-red" onclick="switchTab(this, 'bags')">Sacs</button>
+                    <button class="tab-button text-ruby-red" onclick="switchTab(this, 'shoes')">Chaussures</button>
+                </div>
+            </div>
+
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                <!-- Produit 1 -->
+                <div class="product-card group relative overflow-hidden rounded-xl border border-white/10">
+                    <div class="relative aspect-[3/4] overflow-hidden bg-stone">
+                        <img src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" alt="Veste" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                            <button onclick="addToCart(1, 'Veste Sartoriale Rumusha', 12500, 'public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg')" class="bg-white text-ruby-red px-8 py-4 font-bold uppercase text-[10px] tracking-[0.3em] transform translate-y-10 group-hover:translate-y-0 transition-all duration-500 hover:bg-ruby-red hover:text-white">
+                                Ajouter au Panier
+                            </button>
+                        </div>
+                    </div>
+                    <div class="py-8 text-center bg-black/20">
+                        <span class="text-[10px] font-black uppercase tracking-[0.4em] text-gold mb-3 block">Collection Milan</span>
+                        <h3 class="text-2xl font-luxury font-bold mb-4 text-terracotta">Veste Sartoriale Rumusha</h3>
+                        <p class="text-2xl font-black tracking-tighter text-terracotta">12 500 DZD</p>
+                    </div>
+                </div>
+
+                <!-- Produit 2 -->
+                <div class="product-card group relative overflow-hidden rounded-xl border border-white/10">
+                    <div class="relative aspect-[3/4] overflow-hidden bg-stone">
+                        <img src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" alt="Manteau" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                            <button onclick="addToCart(2, 'Cappotto en Laine Toscane', 35000, 'public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg')" class="bg-white text-ruby-red px-8 py-4 font-bold uppercase text-[10px] tracking-[0.3em] transform translate-y-10 group-hover:translate-y-0 transition-all duration-500 hover:bg-ruby-red hover:text-white">
+                                Ajouter au Panier
+                            </button>
+                        </div>
+                    </div>
+                    <div class="py-8 text-center bg-black/20">
+                        <span class="text-[10px] font-black uppercase tracking-[0.4em] text-gold mb-3 block">Fait à la Main</span>
+                        <h3 class="text-2xl font-luxury font-bold mb-4 text-terracotta">Cappotto en Laine Toscane</h3>
+                        <p class="text-2xl font-black tracking-tighter text-terracotta">35 000 DZD</p>
+                    </div>
+                </div>
+
+                <!-- Produit 3 -->
+                <div class="product-card group relative overflow-hidden rounded-xl border border-white/10 hidden lg:block">
+                    <div class="relative aspect-[3/4] overflow-hidden bg-stone">
+                        <img src="public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg" alt="Pantalon" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                            <button onclick="addToCart(3, 'Pantalon Sartorial Noir', 18200, 'public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg')" class="bg-white text-ruby-red px-8 py-4 font-bold uppercase text-[10px] tracking-[0.3em] transform translate-y-10 group-hover:translate-y-0 transition-all duration-500 hover:bg-ruby-red hover:text-white">
+                                Ajouter au Panier
+                            </button>
+                        </div>
+                    </div>
+                    <div class="py-8 text-center bg-black/20">
+                        <span class="text-[10px] font-black uppercase tracking-[0.4em] text-gold mb-3 block">Édition Limitée</span>
+                        <h3 class="text-2xl font-luxury font-bold mb-4 text-terracotta">Pantalon Sartorial Noir</h3>
+                        <p class="text-2xl font-black tracking-tighter text-terracotta">18 200 DZD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUOTE SECTION -->
+    <section class="py-48 bg-cypress text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 flex items-center justify-center">
+            <span class="text-[40vw] font-luxury font-black text-white leading-none">R</span>
+        </div>
+        <div class="max-w-4xl mx-auto px-8 relative z-10">
+            <h2 class="text-white text-5xl md:text-8xl font-luxury font-black italic mb-12 leading-tight">"La mode passe, <br><span class="text-gold">le style reste.</span>"</h2>
+            <p class="text-gold font-bold tracking-[0.4em] uppercase text-sm">— Rumusha Milan</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-marble pt-32 pb-12 px-8 lg:px-24">
+        <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-24 mb-24">
+            <div class="col-span-1 md:col-span-1">
+                <a href="#" class="font-luxury text-4xl font-black mb-8 block uppercase">caba_italie2</a>
+                <p class="text-neutral-500 font-medium leading-relaxed mb-12">L'excellence de la couture italienne rencontre l'innovation du design moderne. Créé à Milan, porté dans le monde entier.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="text-xl hover:text-gold transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-xl hover:text-gold transition"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+            
+            <div class="space-y-8">
+                <h4 class="font-black uppercase tracking-[0.3em] text-xs">Menu</h4>
+                <ul class="space-y-4 font-bold text-sm text-neutral-400">
+                    <li><a href="search.html" class="hover:text-gold transition">Collection</a></li>
+                    <li><a href="search.html" class="hover:text-gold transition">Sur-Mesure</a></li>
+                    <li><a href="search.html" class="hover:text-gold transition">Accessoires</a></li>
+                    <li><a href="#" class="hover:text-gold transition">Nos Artisans</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-8">
+                <h4 class="font-black uppercase tracking-[0.3em] text-xs">Assistance</h4>
+                <ul class="space-y-4 font-bold text-sm text-neutral-400">
+                    <li><a href="#" class="hover:text-gold transition">Livraison</a></li>
+                    <li><a href="#" class="hover:text-gold transition">Retours</a></li>
+                    <li><a href="#" class="hover:text-gold transition">FAQ</a></li>
+                    <li><a href="#" class="hover:text-gold transition">Contacts</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-12">
+                <h4 class="font-black uppercase tracking-[0.3em] text-xs">Newsletter</h4>
+                <p class="text-neutral-500 text-sm italic">"Rejoignez notre cercle exclusif pour les nouveautés milanaises."</p>
+                <form class="flex border-b border-cypress pb-4">
+                    <input type="email" placeholder="Votre email" class="bg-transparent flex-1 outline-none text-sm font-bold placeholder:opacity-30">
+                    <button class="text-gold hover:text-cypress transition"><i class="fa-solid fa-arrow-right-long"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="max-w-[1600px] mx-auto pt-12 border-t border-gold/10 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
+            <p>© 2024 caba_italie2. Tous droits réservés.</p>
+            <div class="flex gap-12">
+                <a href="#" class="hover:text-gold transition">Confidentialité</a>
+                <a href="#" class="hover:text-gold transition">Conditions</a>
+                <a href="#" class="hover:text-gold transition">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('rumusha_cart')) || [];
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('closed');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
+            renderCart();
+        }
+        function toggleSearch() {
+            document.getElementById('search-overlay').classList.toggle('hidden');
+        }
+        function addToCart(id, title, price, img) {
+            const existing = cart.find(item => item.id === id);
+            if(existing) { existing.qty++; } else { cart.push({ id, title, price, img, qty: 1 }); }
+            saveAndRefresh();
+            toggleCart();
+        }
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveAndRefresh();
+        }
+        function saveAndRefresh() {
+            localStorage.setItem('rumusha_cart', JSON.stringify(cart));
+            updateUI();
+            renderCart();
+        }
+        function updateUI() {
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            document.getElementById('cart-count-badge').textContent = count;
+            document.getElementById('cart-total-header').textContent = total.toLocaleString() + " DZD";
+        }
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+            if(cart.length === 0) {
+                emptyMsg.style.display = 'flex';
+                container.querySelectorAll('.cart-item-row').forEach(el => el.remove());
+                totalEl.textContent = "0 DZD";
+                return;
+            }
+            emptyMsg.style.display = 'none';
+            container.querySelectorAll('.cart-item-row').forEach(el => el.remove());
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                const row = document.createElement('div');
+                row.className = 'cart-item-row flex gap-6 bg-white p-6 shadow-sm border border-gold/10';
+                row.innerHTML = `
+                    <div class="w-24 h-32 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <h3 class="font-luxury font-bold text-lg leading-tight text-carbon">${item.title}</h3>
+                                <button onclick="removeFromCart(${item.id})" class="text-neutral-300 hover:text-terracotta transition"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                            <p class="text-[9px] font-black uppercase tracking-widest text-gold mt-2">Artisanat Italien</p>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <span class="text-xs font-bold text-carbon">${item.qty} x ${item.price.toLocaleString()} DZD</span>
+                            <p class="font-luxury font-bold text-terracotta">${(item.price * item.qty).toLocaleString()} DZD</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+            totalEl.textContent = total.toLocaleString() + " ¥";
+        }
+        function switchTab(btn, collection) {
+            // Gérer l'état actif pour la ligne de soulignement
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const grid = document.getElementById('product-grid');
+            grid.style.opacity = '0';
+            
+            setTimeout(() => {
+                renderCategory(collection);
+                grid.style.opacity = '1';
+            }, 400);
+        }
+
+        const productsData = {
+            clothing: [
+                { id: 1, title: 'Veste Sartoriale Rumusha', price: 12500, img: 'public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg', tag: 'Collection Milan' },
+                { id: 2, title: 'Cappotto en Laine Toscane', price: 35000, img: 'public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg', tag: 'Fait à la Main' },
+                { id: 3, title: 'Pantalon Sartorial Noir', price: 18200, img: 'public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg', tag: 'Édition Limitée' }
+            ],
+            bags: [
+                { id: 4, title: 'Sac à Main Cuir Milano', price: 28500, img: 'public/images/home2/590968109_17864088789519012_3926422638561942573_n.jpg', tag: 'Collection Cuir' },
+                { id: 5, title: 'Pochette de Soirée', price: 15000, img: 'public/images/home2/S%20M%20L%20XL%20XXL%20🇮🇹.jpg', tag: 'Accessoire Luxe' },
+                { id: 6, title: 'Sac de Voyage Toscan', price: 42000, img: 'public/images/home2/S%20M%20L%20XL.jpg', tag: 'Fait Main' }
+            ],
+            shoes: [
+                { id: 7, title: 'Mocassins en Daim', price: 19500, img: 'public/images/home3/575630228_17861292312519012_6618196001113089554_n.jpg', tag: 'Confort Absolu' },
+                { id: 8, title: 'Bottines Sartoriales', price: 24000, img: 'public/images/home3/587630663_17863753971519012_7011408170577514741_n.jpg', tag: 'Hiver 2024' },
+                { id: 9, title: 'Richelieus Classiques', price: 22500, img: 'public/images/home3/588337083_17863754115519012_2397963502552867433_n.jpg', tag: 'Élégance Pure' }
+            ]
+        };
+
+        function renderCategory(collection) {
+            const grid = document.getElementById('product-grid');
+            const products = productsData[collection] || productsData.clothing;
+            
+            grid.innerHTML = products.map(p => `
+                <div class="product-card group relative overflow-hidden rounded-xl border border-white/10 ${p.id > 2 && collection === 'clothing' ? 'hidden lg:block' : ''}">
+                    <div class="relative aspect-[3/4] overflow-hidden bg-stone">
+                        <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                            <button onclick="addToCart(${p.id}, '${p.title}', ${p.price}, '${p.img}')" class="bg-ruby-red text-white px-8 py-4 font-bold uppercase text-[10px] tracking-[0.3em] transform translate-y-10 group-hover:translate-y-0 transition-all duration-500 hover:bg-white hover:text-ruby-red">
+                                Ajouter au Panier
+                            </button>
+                        </div>
+                    </div>
+                    <div class="py-8 text-center bg-black/20">
+                        <span class="text-[10px] font-black uppercase tracking-[0.4em] text-gold mb-3 block">${p.tag}</span>
+                        <h3 class="text-2xl font-luxury font-bold mb-4 text-terracotta">${p.title}</h3>
+                        <p class="text-2xl font-black tracking-tighter text-terracotta">${p.price.toLocaleString()} DZD</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Video Rotation Logic
+        const videos = [
+            "public/videos/AQP-UYgRYmYOxtEHeTOWfzKBy3ElhOPqcsszRCcXocfussCvbliSM30-ZaaIVPh21XjPmEnxfWX8aJufVMV2cnnY.mp4",
+            "public/videos/AQPKC1leKzoZGcVHtogN7GNhRaOBEtUERGKgDk_RxrTxBDIkZgHJpNvZJkPjExc2chY2mSqasmYLSpt4TtyYVPt6N5sk_a_F.mp4",
+            "public/videos/%23outfit%20%23dz%20%23algerie%20%23outfitinspiration%20%23oran.mp4"
+        ];
+        let currentVideoIndex = 0;
+        const videoElement = document.getElementById('hero-video');
+        const videoBgElement = document.getElementById('hero-video-bg');
+
+        if(videoElement) {
+            videoElement.addEventListener('ended', function() {
+                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                videoElement.src = videos[currentVideoIndex];
+                if(videoBgElement) videoBgElement.src = videos[currentVideoIndex];
+                videoElement.play();
+                if(videoBgElement) videoBgElement.play();
+            });
+        }
+
+        updateUI();
+        renderCategory('clothing');
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if(window.scrollY > 100) { header.classList.add('h-20', 'shadow-2xl'); header.classList.remove('h-24'); }
+            else { header.classList.add('h-24'); header.classList.remove('h-20', 'shadow-2xl'); }
+        });
+    </script>
+</body>
+</html>

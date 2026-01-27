@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produit - Rumusha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple: #9333ea;
+            --dark-purple: #581c87;
+            --very-dark-purple: #2d1b4d;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-lora { font-family: 'Lora', serif; }
+        .btn-buy {
+            background-color: var(--very-dark-purple);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 99px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .btn-buy:hover {
+            background-color: #1a0f2e;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-neutral-50 text-black">
+
+    <!-- Navigation (Identique à index.html) -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-purple/20 h-20">
+        <div class="max-w-[1440px] mx-auto h-full flex items-center justify-between px-4 lg:px-12">
+            <a href="index.html" class="flex items-center">
+                <img src="public/images/logo.png" alt="Rumusha" class="h-10 md:h-12">
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-bold uppercase tracking-widest text-neutral-400 hover:text-black">Retour</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Détail Produit -->
+    <main class="max-w-[1440px] mx-auto py-12 px-4 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Galerie Images -->
+        <div class="space-y-4">
+            <div class="aspect-[4/5] rounded-3xl overflow-hidden bg-neutral-100 shadow-xl">
+                <img src="public/images/screenshots/home.webp" alt="Produit" class="w-full h-full object-cover">
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="aspect-square rounded-xl overflow-hidden bg-neutral-200 border-2 border-purple">
+                    <img src="public/images/screenshots/home.webp" alt="Produit" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden bg-neutral-200 hover:opacity-80 cursor-pointer">
+                    <img src="public/images/promotions/winter.jpg" alt="Produit" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- Infos Produit -->
+        <div class="flex flex-col gap-8">
+            <div>
+                <h1 class="font-lora text-4xl md:text-5xl font-bold text-[#2d1b4d]">Chemise Kimono Moderne</h1>
+                <p class="text-2xl font-semibold mt-4">12 500 DZD</p>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="font-bold text-sm uppercase tracking-widest text-neutral-500">Taille</h3>
+                <div class="flex gap-3">
+                    <button class="w-12 h-12 rounded-full border-2 border-purple flex items-center justify-center font-bold">S</button>
+                    <button class="w-12 h-12 rounded-full border border-neutral-300 flex items-center justify-center font-bold hover:border-black">M</button>
+                    <button class="w-12 h-12 rounded-full border border-neutral-300 flex items-center justify-center font-bold hover:border-black">L</button>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-neutral-600 leading-relaxed">
+                <h3 class="font-bold text-sm uppercase tracking-widest text-neutral-500">Description</h3>
+                <p>
+                    Une pièce unique alliant la tradition japonaise et le confort moderne. Fabriquée en coton de haute qualité, cette chemise kimono est idéale pour un look élégant et décontracté.
+                </p>
+                <ul class="list-disc pl-5 space-y-2 mt-4">
+                    <li>Coton 100% biologique</li>
+                    <li>Coupe unisexe</li>
+                    <li>Détails brodés à la main</li>
+                </ul>
+            </div>
+
+            <div class="pt-8">
+                <button class="btn-buy">Ajouter au Panier</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Simple -->
+    <footer class="mt-24 border-t py-12 text-center text-neutral-400 text-sm">
+        <p>© 2024 Rumusha - Site de Démonstration</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Compte - Rumusha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --purple: #9333ea;
+            --very-dark-purple: #2d1b4d;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-lora { font-family: 'Lora', serif; }
+        
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            transform: translateY(-24px) scale(0.8);
+            color: var(--purple);
+        }
+    </style>
+</head>
+<body class="bg-neutral-50 text-black">
+
+    <!-- HEADER -->
+    <header class="h-20 bg-white border-b border-purple/10 flex items-center justify-between px-12 sticky top-0 z-50">
+        <a href="index.html" class="hover:scale-105 transition"><img src="public/images/logo.png" alt="Rumusha" class="h-10"></a>
+        <a href="index.html" class="text-xs font-black uppercase tracking-widest text-neutral-400 hover:text-purple transition flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> Boutique
+        </a>
+    </header>
+
+    <main class="max-w-[1440px] mx-auto py-24 px-6 flex flex-col lg:flex-row gap-24">
+        <!-- Connexion -->
+        <div class="flex-1 max-w-xl mx-auto lg:mx-0">
+            <h1 class="text-5xl font-lora font-bold text-very-dark-purple mb-4">Bon retour parmi nous</h1>
+            <p class="text-neutral-500 text-lg mb-12">Connectez-vous pour accéder à vos commandes, vos favoris et vos adresses enregistrées.</p>
+            
+            <form class="space-y-8">
+                <div class="input-group relative">
+                    <input type="email" placeholder=" " class="w-full bg-transparent border-b-2 border-neutral-200 py-4 outline-none focus:border-purple transition-all text-lg">
+                    <label class="absolute left-0 top-4 font-bold text-neutral-400 pointer-events-none transition-all">Adresse Email</label>
+                </div>
+                <div class="input-group relative">
+                    <input type="password" placeholder=" " class="w-full bg-transparent border-b-2 border-neutral-200 py-4 outline-none focus:border-purple transition-all text-lg">
+                    <label class="absolute left-0 top-4 font-bold text-neutral-400 pointer-events-none transition-all">Mot de passe</label>
+                </div>
+                <div class="flex justify-between items-center text-sm font-bold">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" class="accent-purple w-4 h-4"> Se souvenir de moi
+                    </label>
+                    <a href="#" class="text-purple hover:underline">Mot de passe oublié ?</a>
+                </div>
+                <button class="w-full bg-very-dark-purple text-white py-6 rounded-full font-black text-xl hover:bg-black transition-all shadow-xl hover:shadow-purple/20">Se Connecter</button>
+            </form>
+
+            <div class="mt-12 pt-12 border-t border-neutral-100 flex items-center gap-6">
+                <p class="text-neutral-400 font-bold">Ou connectez-vous avec</p>
+                <div class="flex gap-4">
+                    <button class="w-14 h-14 rounded-full border border-neutral-200 flex items-center justify-center hover:bg-neutral-50 transition"><i class="fa-brands fa-google text-xl"></i></button>
+                    <button class="w-14 h-14 rounded-full border border-neutral-200 flex items-center justify-center hover:bg-neutral-50 transition"><i class="fa-brands fa-apple text-2xl"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inscription -->
+        <div class="flex-1 bg-very-dark-purple rounded-[60px] p-16 text-white flex flex-col justify-center relative overflow-hidden shadow-2xl">
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-purple/20 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-purple/10 rounded-full blur-3xl"></div>
+            
+            <h2 class="text-4xl font-lora font-bold mb-6 relative z-10">Pas encore de compte ?</h2>
+            <p class="text-white/60 text-lg mb-12 relative z-10">Créez votre compte en quelques secondes et profitez de -10% sur votre première commande !</p>
+            
+            <ul class="space-y-6 mb-12 relative z-10">
+                <li class="flex items-center gap-4 text-white/80"><i class="fa-solid fa-check text-purple"></i> Suivi de commande en temps réel</li>
+                <li class="flex items-center gap-4 text-white/80"><i class="fa-solid fa-check text-purple"></i> Liste de favoris personnalisée</li>
+                <li class="flex items-center gap-4 text-white/80"><i class="fa-solid fa-check text-purple"></i> Accès prioritaire aux soldes</li>
+            </ul>
+            
+            <button class="bg-white text-very-dark-purple py-6 rounded-full font-black text-xl hover:bg-purple hover:text-white transition-all shadow-xl relative z-10">Créer mon compte</button>
+        </div>
+    </main>
+
+    <footer class="mt-24 border-t py-12 text-center text-neutral-400 text-sm">
+        <p>© 2024 Rumusha - Site de Démonstration Professionnel</p>
+    </footer>
+
+</body>
+</html>

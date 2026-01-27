@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique - Rumusha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --purple: #9333ea;
+            --very-dark-purple: #2d1b4d;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-lora { font-family: 'Lora', serif; }
+        
+        .filter-checkbox:checked + label {
+            background-color: var(--purple);
+            color: white;
+            border-color: var(--purple);
+        }
+
+        /* Cart Sidebar (Shared) */
+        #cart-sidebar { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        #cart-sidebar.closed { transform: translateX(100%); }
+    </style>
+</head>
+<body class="bg-neutral-50 text-black">
+
+    <!-- PANIER (SIDEBAR) -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[450px] bg-white z-[100] shadow-2xl flex flex-col closed">
+        <div class="p-6 border-b flex justify-between items-center">
+            <h2 class="text-2xl font-bold font-lora text-very-dark-purple">Votre Panier (<span id="cart-count-sidebar">0</span>)</h2>
+            <button onclick="toggleCart()" class="text-3xl hover:text-purple transition">&times;</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
+            <div id="empty-cart-msg" class="h-full flex flex-col items-center justify-center text-neutral-400 gap-4">
+                <i class="fa-solid fa-cart-shopping text-6xl opacity-20"></i>
+                <p class="text-lg">Votre panier est encore vide</p>
+                <button onclick="toggleCart()" class="text-purple font-bold hover:underline">Continuer vos achats</button>
+            </div>
+        </div>
+        <div class="p-6 border-t bg-neutral-50 text-xl font-bold flex justify-between">
+            <span>Total</span>
+            <span id="cart-total">0 DZD</span>
+        </div>
+    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] hidden" onclick="toggleCart()"></div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-purple/10 h-20">
+        <div class="max-w-[1440px] mx-auto h-full flex items-center justify-between px-6 lg:px-12">
+            <a href="index.html" class="flex items-center hover:scale-105 transition">
+                <img src="public/images/logo.png" alt="Rumusha" class="h-10 md:h-12">
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="text-sm font-black uppercase tracking-widest text-neutral-400 hover:text-purple transition">Accueil</a>
+                <button onclick="toggleCart()" class="relative group">
+                    <i class="fa-solid fa-bag-shopping text-2xl group-hover:text-purple transition"></i>
+                    <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-purple text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-lg">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- SEARCH HERO -->
+    <section class="bg-very-dark-purple py-24 text-center px-6">
+        <h1 class="text-white text-6xl md:text-7xl font-lora font-bold mb-6">Explorez la Boutique</h1>
+        <p class="text-white/60 text-xl max-w-2xl mx-auto">Découvrez notre sélection curatée de vêtements et accessoires japonais modernes.</p>
+    </section>
+
+    <!-- MAIN SHOP AREA -->
+    <main class="max-w-[1440px] mx-auto py-16 px-6 lg:px-12 flex flex-col lg:flex-row gap-16">
+        <!-- FILTRES -->
+        <aside class="w-full lg:w-72 flex flex-col gap-12">
+            <div class="space-y-6">
+                <h3 class="font-black uppercase tracking-widest text-sm text-very-dark-purple pb-4 border-b">Catégories</h3>
+                <div class="flex flex-wrap lg:flex-col gap-3">
+                    <label class="flex items-center justify-between cursor-pointer group">
+                        <span class="font-bold text-neutral-500 group-hover:text-purple transition">Nouveautés</span>
+                        <span class="text-xs bg-neutral-100 px-2 py-1 rounded-full">12</span>
+                    </label>
+                    <label class="flex items-center justify-between cursor-pointer group">
+                        <span class="font-bold text-purple">Vêtements</span>
+                        <span class="text-xs bg-purple/10 text-purple px-2 py-1 rounded-full">45</span>
+                    </label>
+                    <label class="flex items-center justify-between cursor-pointer group">
+                        <span class="font-bold text-neutral-500 group-hover:text-purple transition">Sacs</span>
+                        <span class="text-xs bg-neutral-100 px-2 py-1 rounded-full">18</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <h3 class="font-black uppercase tracking-widest text-sm text-very-dark-purple pb-4 border-b">Taille</h3>
+                <div class="flex flex-wrap gap-2">
+                    <button class="w-10 h-10 border-2 border-neutral-100 rounded-lg flex items-center justify-center font-bold text-xs hover:border-purple">S</button>
+                    <button class="w-10 h-10 border-2 border-purple bg-purple/5 rounded-lg flex items-center justify-center font-bold text-xs">M</button>
+                    <button class="w-10 h-10 border-2 border-neutral-100 rounded-lg flex items-center justify-center font-bold text-xs hover:border-purple">L</button>
+                    <button class="w-10 h-10 border-2 border-neutral-100 rounded-lg flex items-center justify-center font-bold text-xs hover:border-purple">XL</button>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <h3 class="font-black uppercase tracking-widest text-sm text-very-dark-purple pb-4 border-b">Prix</h3>
+                <input type="range" class="w-full accent-purple" min="0" max="100000" step="5000">
+                <div class="flex justify-between font-bold text-sm text-neutral-400">
+                    <span>0 DZD</span>
+                    <span>100 000 DZD</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- GRID PRODUITS -->
+        <div class="flex-1">
+            <div class="flex justify-between items-center mb-12">
+                <p class="font-bold text-neutral-400">45 produits trouvés</p>
+                <select class="bg-transparent border-b-2 border-neutral-200 font-bold py-2 outline-none focus:border-purple">
+                    <option>Nouveautés</option>
+                    <option>Prix croissant</option>
+                    <option>Prix décroissant</option>
+                </select>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12">
+                <!-- Produit 1 -->
+                <div class="group flex flex-col gap-6">
+                    <div class="relative aspect-[3/4] rounded-[40px] overflow-hidden bg-white shadow-sm group-hover:shadow-2xl transition-all duration-500">
+                        <img src="public/images/screenshots/home.webp" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <button onclick="addToCart(1, 'Chemise Kimono Moderne', 12500, 'public/images/screenshots/home.webp')" class="absolute bottom-6 right-6 w-14 h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-xl opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-purple hover:text-white">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-purple font-black uppercase text-[10px] tracking-widest">Vêtements</span>
+                            <div class="flex text-yellow-400 text-[10px] gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <a href="product.html"><h3 class="text-2xl font-bold text-very-dark-purple hover:text-purple transition">Chemise Kimono Moderne</h3></a>
+                        <p class="text-2xl font-black text-very-dark-purple tracking-tighter mt-2">12 500 DZD</p>
+                    </div>
+                </div>
+
+                <!-- Produit 2 -->
+                <div class="group flex flex-col gap-6">
+                    <div class="relative aspect-[3/4] rounded-[40px] overflow-hidden bg-white shadow-sm group-hover:shadow-2xl transition-all duration-500">
+                        <img src="public/images/promotions/winter.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <button onclick="addToCart(2, 'Manteau d\'Hiver Élégant', 35000, 'public/images/promotions/winter.jpg')" class="absolute bottom-6 right-6 w-14 h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-xl opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-purple hover:text-white">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-purple font-black uppercase text-[10px] tracking-widest">Vêtements</span>
+                        </div>
+                        <a href="product-2.html"><h3 class="text-2xl font-bold text-very-dark-purple hover:text-purple transition">Manteau d'Hiver Élégant</h3></a>
+                        <p class="text-2xl font-black text-very-dark-purple tracking-tighter mt-2">35 000 DZD</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-24 flex justify-center gap-4">
+                <button class="w-14 h-14 rounded-2xl bg-purple text-white font-bold shadow-lg shadow-purple/20">1</button>
+                <button class="w-14 h-14 rounded-2xl bg-white border-2 border-neutral-100 font-bold hover:border-purple transition">2</button>
+                <button class="w-14 h-14 rounded-2xl bg-white border-2 border-neutral-100 font-bold hover:border-purple transition">3</button>
+                <button class="w-14 h-14 rounded-2xl bg-white border-2 border-neutral-100 font-bold hover:border-purple transition flex items-center justify-center"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER (Shared) -->
+    <footer class="bg-white border-t border-purple/10 py-24 text-center">
+        <p class="font-black text-very-dark-purple tracking-[0.3em] uppercase mb-8">Rumusha Boutique</p>
+        <div class="flex justify-center gap-8 mb-12">
+            <a href="#" class="text-neutral-400 hover:text-purple transition"><i class="fa-brands fa-instagram text-2xl"></i></a>
+            <a href="#" class="text-neutral-400 hover:text-purple transition"><i class="fa-brands fa-facebook text-2xl"></i></a>
+        </div>
+        <p class="text-sm text-neutral-400">© 2024 Rumusha - Site Statique Professionnel</p>
+    </footer>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('rumusha_cart')) || [];
+        function updateBadge() {
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.getElementById('cart-count-badge').textContent = count;
+            document.getElementById('cart-count-sidebar').textContent = count;
+        }
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('closed');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
+            renderCart();
+        }
+        function addToCart(id, title, price, img) {
+            const existing = cart.find(item => item.id === id);
+            if(existing) { existing.qty++; } else { cart.push({ id, title, price, img, qty: 1 }); }
+            localStorage.setItem('rumusha_cart', JSON.stringify(cart));
+            updateBadge();
+            toggleCart();
+        }
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+            if(cart.length === 0) {
+                emptyMsg.style.display = 'flex';
+                container.querySelectorAll('.cart-item-row').forEach(el => el.remove());
+                totalEl.textContent = "0 DZD";
+                return;
+            }
+            emptyMsg.style.display = 'none';
+            container.querySelectorAll('.cart-item-row').forEach(el => el.remove());
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                const row = document.createElement('div');
+                row.className = 'cart-item-row flex gap-4 bg-neutral-50 p-4 rounded-2xl border border-neutral-100 mb-4';
+                row.innerHTML = `<div class="w-16 h-20 rounded-xl overflow-hidden bg-white shadow-sm"><img src="${item.img}" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold text-sm">${item.title}</h3><p class="text-purple font-black mt-2">${item.price.toLocaleString()} DZD</p></div>`;
+                container.appendChild(row);
+            });
+            totalEl.textContent = total.toLocaleString() + " DZD";
+        }
+        updateBadge();
+    </script>
+</body>
+</html>
