@@ -312,13 +312,13 @@
         </div>
     </section>
 
-    <!-- BEST SELLERS -->
+    <!-- PROMOTIONS -->
     <section class="py-32 bg-white">
         <div class="max-w-[1600px] mx-auto px-8 lg:px-16">
             <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
                 <div class="max-w-2xl">
-                    <h2 class="text-6xl md:text-8xl font-luxury font-bold text-terracotta mb-8 tracking-tighter">Nos <br><span class="italic text-terracotta">Classiques</span></h2>
-                    <p class="text-terracotta text-xl font-medium italic opacity-80">"Le style italien ne se voit pas seulement, il se ressent."</p>
+                    <h2 class="text-6xl md:text-8xl font-luxury font-bold text-terracotta mb-8 tracking-tighter">En <br><span class="italic text-terracotta">Promotion</span></h2>
+                    <p class="text-terracotta text-xl font-medium italic opacity-80">"L'élégance italienne à prix privilégiés."</p>
                 </div>
                 <div class="flex gap-12 text-sm font-black uppercase tracking-[0.3em] pb-4 border-b border-ruby-red/20">
                     <button class="tab-button active text-ruby-red" onclick="switchTab(this, 'clothing')">Vêtements</button>
@@ -519,19 +519,19 @@
 
         const productsData = {
             clothing: [
-                { id: 1, title: 'Veste Sartoriale Rumusha', price: 12500, img: 'public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg', tag: 'Collection Milan' },
-                { id: 2, title: 'Cappotto en Laine Toscane', price: 35000, img: 'public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg', tag: 'Fait à la Main' },
-                { id: 3, title: 'Pantalon Sartorial Noir', price: 18200, img: 'public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg', tag: 'Édition Limitée' }
+                { id: 1, title: 'Veste Sartoriale Rumusha', price: 12500, oldPrice: 15500, img: 'public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg', tag: 'OFFRE LIMITÉE' },
+                { id: 2, title: 'Cappotto en Laine Toscane', price: 35000, oldPrice: 42000, img: 'public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg', tag: 'OFFRE LIMITÉE' },
+                { id: 3, title: 'Pantalon Sartorial Noir', price: 18200, oldPrice: 22000, img: 'public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg', tag: 'OFFRE LIMITÉE' }
             ],
             bags: [
-                { id: 4, title: 'Sac à Main Cuir Milano', price: 28500, img: 'public/images/home2/590968109_17864088789519012_3926422638561942573_n.jpg', tag: 'Collection Cuir' },
-                { id: 5, title: 'Pochette de Soirée', price: 15000, img: 'public/images/home2/S%20M%20L%20XL%20XXL%20🇮🇹.jpg', tag: 'Accessoire Luxe' },
-                { id: 6, title: 'Sac de Voyage Toscan', price: 42000, img: 'public/images/home2/S%20M%20L%20XL.jpg', tag: 'Fait Main' }
+                { id: 4, title: 'Sac à Main Cuir Milano', price: 28500, oldPrice: 35000, img: 'public/images/home2/590968109_17864088789519012_3926422638561942573_n.jpg', tag: 'OFFRE LIMITÉE' },
+                { id: 5, title: 'Pochette de Soirée', price: 15000, oldPrice: 19000, img: 'public/images/home2/S%20M%20L%20XL%20XXL%20🇮🇹.jpg', tag: 'OFFRE LIMITÉE' },
+                { id: 6, title: 'Sac de Voyage Toscan', price: 42000, oldPrice: 52000, img: 'public/images/home2/S%20M%20L%20XL.jpg', tag: 'OFFRE LIMITÉE' }
             ],
             shoes: [
-                { id: 7, title: 'Mocassins en Daim', price: 19500, img: 'public/images/home3/575630228_17861292312519012_6618196001113089554_n.jpg', tag: 'Confort Absolu' },
-                { id: 8, title: 'Bottines Sartoriales', price: 24000, img: 'public/images/home3/587630663_17863753971519012_7011408170577514741_n.jpg', tag: 'Hiver 2024' },
-                { id: 9, title: 'Richelieus Classiques', price: 22500, img: 'public/images/home3/588337083_17863754115519012_2397963502552867433_n.jpg', tag: 'Élégance Pure' }
+                { id: 7, title: 'Mocassins en Daim', price: 19500, oldPrice: 25000, img: 'public/images/home3/575630228_17861292312519012_6618196001113089554_n.jpg', tag: 'OFFRE LIMITÉE' },
+                { id: 8, title: 'Bottines Sartoriales', price: 24000, oldPrice: 30000, img: 'public/images/home3/587630663_17863753971519012_7011408170577514741_n.jpg', tag: 'OFFRE LIMITÉE' },
+                { id: 9, title: 'Richelieus Classiques', price: 22500, oldPrice: 28000, img: 'public/images/home3/588337083_17863754115519012_2397963502552867433_n.jpg', tag: 'OFFRE LIMITÉE' }
             ]
         };
 
@@ -542,6 +542,7 @@
             grid.innerHTML = products.map(p => `
                 <div class="product-card group relative overflow-hidden rounded-xl border border-white/10 ${p.id > 2 && collection === 'clothing' ? 'hidden lg:block' : ''}">
                     <div class="relative aspect-[3/4] overflow-hidden bg-stone">
+                        <div class="absolute top-4 left-4 z-20 bg-ruby-red text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">-20%</div>
                         <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
                         <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                             <button onclick="addToCart(${p.id}, '${p.title}', ${p.price}, '${p.img}')" class="bg-ruby-red text-white px-8 py-4 font-bold uppercase text-[10px] tracking-[0.3em] transform translate-y-10 group-hover:translate-y-0 transition-all duration-500 hover:bg-white hover:text-ruby-red">
@@ -552,7 +553,10 @@
                     <div class="py-8 text-center bg-black/20">
                         <span class="text-[10px] font-black uppercase tracking-[0.4em] text-gold mb-3 block">${p.tag}</span>
                         <h3 class="text-2xl font-luxury font-bold mb-4 text-terracotta">${p.title}</h3>
-                        <p class="text-2xl font-black tracking-tighter text-terracotta">${p.price.toLocaleString()} DZD</p>
+                        <div class="flex items-center justify-center gap-4">
+                            <p class="text-2xl font-black tracking-tighter text-terracotta">${p.price.toLocaleString()} DZD</p>
+                            <p class="text-lg font-bold tracking-tighter text-neutral-400 line-through opacity-50">${p.oldPrice.toLocaleString()} DZD</p>
+                        </div>
                     </div>
                 </div>
             `).join('');
