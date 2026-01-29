@@ -30,8 +30,38 @@
         #cart-sidebar { transition: transform 0.6s cubic-bezier(0.82, 0.01, 0.21, 1); background-color: var(--alabaster); color: var(--carbon); }
         #cart-sidebar.closed { transform: translateX(100%); }
 
-        .filter-btn { transition: all 0.3s; border: 1px solid rgba(242, 240, 233, 0.1); }
-        .filter-btn.active { background-color: var(--ruby-red); border-color: var(--ruby-red); color: white; }
+        /* Carousel Styles */
+        .product-carousel { position: relative; width: 100%; height: 100%; overflow: hidden; }
+        .carousel-track { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+        .carousel-slide { min-width: 100%; height: 100%; }
+        .carousel-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+        .carousel-dot { w-2 h-2 rounded-full bg-white/30 cursor-pointer transition-all; }
+        .carousel-dot.active { bg-ruby-red w-6; }
+        .carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(13, 19, 14, 0.5); backdrop-filter: blur(5px); border-radius: 50%; color: white; display: flex; items-center; justify-center; opacity: 0; transition: all 0.3s; z-index: 20; }
+        .group:hover .carousel-arrow { opacity: 1; }
+        .carousel-arrow:hover { background: var(--ruby-red); }
+
+        .btn-commander {
+            background: linear-gradient(135deg, var(--ruby-red) 0%, #7a1526 100%);
+            color: white;
+            padding: 12px 24px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(155, 27, 48, 0.3);
+            transition: all 0.4s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-commander:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(155, 27, 48, 0.5);
+            background: var(--alabaster);
+            color: var(--carbon);
+        }
     </style>
 </head>
 <body>
@@ -76,95 +106,101 @@
         </div>
     </header>
 
-    <!-- SEARCH HERO -->
-    <section class="py-32 text-center bg-carbon/40 backdrop-blur-sm border-b border-white/5 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center">
-            <span class="text-[30vw] font-luxury font-black text-white">SHOP</span>
-        </div>
-        <div class="relative z-10 px-8">
-            <h1 class="text-white text-6xl md:text-8xl font-luxury font-black italic mb-8 tracking-tighter leading-tight">Explorez la <br><span class="text-ruby-red">Collection Milan</span></h1>
-            <p class="text-alabaster/40 text-xl max-w-2xl mx-auto italic font-medium">L'essence de l'artisanat italien, sélectionnée pièce par pièce pour vous.</p>
-        </div>
-    </section>
 
     <!-- MAIN SHOP AREA -->
-    <main class="max-w-[1600px] mx-auto py-24 px-8 lg:px-16 flex flex-col lg:flex-row gap-24">
-        <!-- FILTRES -->
-        <aside class="w-full lg:w-80 flex flex-col gap-16">
-            <div class="space-y-10">
-                <h3 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf pb-6 border-b border-white/10">Catégories</h3>
-                <div class="flex flex-col gap-4">
-                    <button class="filter-btn active w-full py-4 px-6 text-left font-black uppercase tracking-widest text-[10px] rounded-xl">Tout</button>
-                    <button class="filter-btn w-full py-4 px-6 text-left font-black uppercase tracking-widest text-[10px] rounded-xl">Vêtements</button>
-                    <button class="filter-btn w-full py-4 px-6 text-left font-black uppercase tracking-widest text-[10px] rounded-xl">Sacs</button>
-                    <button class="filter-btn w-full py-4 px-6 text-left font-black uppercase tracking-widest text-[10px] rounded-xl">Chaussures</button>
-                </div>
-            </div>
-
-            <div class="space-y-10">
-                <h3 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf pb-6 border-b border-white/10">Budget (DZD)</h3>
-                <input type="range" class="w-full accent-ruby-red bg-white/10" min="0" max="100000" step="5000">
-                <div class="flex justify-between font-black text-[10px] text-alabaster/40 uppercase tracking-widest">
-                    <span>0</span>
-                    <span>100 000+</span>
-                </div>
-            </div>
-        </aside>
-
+    <main class="max-w-[1600px] mx-auto py-12 md:py-24 px-4 md:px-16">
         <!-- GRID PRODUITS -->
-        <div class="flex-1">
-            <div class="flex justify-between items-center mb-16">
-                <p class="font-black text-[10px] text-alabaster/40 uppercase tracking-[0.3em]">Affichage de la collection</p>
-                <select class="bg-transparent border-b border-white/20 font-black text-[10px] py-2 outline-none focus:border-ruby-red uppercase tracking-widest text-alabaster">
-                    <option class="bg-carbon">Nouveautés</option>
-                    <option class="bg-carbon">Prix croissant</option>
-                    <option class="bg-carbon">Prix décroissant</option>
-                </select>
+        <div class="w-full">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 md:mb-16 gap-8">
+                <div class="text-center md:text-left">
+                    <h2 class="text-4xl md:text-6xl font-luxury font-black text-white italic tracking-tighter mb-4">La <span class="text-ruby-red">Collection</span></h2>
+                    <p class="font-black text-[8px] md:text-[10px] text-alabaster/40 uppercase tracking-[0.3em]">Excellence et Artisanat Italien</p>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16">
+            <div class="grid grid-cols-3 md:grid-cols-2 xl:grid-cols-3 gap-2 md:gap-16">
                 <!-- Produit 1 -->
-                <div class="group flex flex-col gap-8">
-                    <div class="relative aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl transition-all duration-500">
-                        <img src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                        <button onclick="addToCart(1, 'Veste Sartoriale Rumusha', 12500, 'public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg')" class="absolute bottom-8 right-8 w-16 h-16 bg-alabaster text-carbon rounded-full shadow-3xl flex items-center justify-center text-xl opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-ruby-red hover:text-white">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
+                <div class="group flex flex-col gap-2 md:gap-8">
+                    <div class="relative aspect-[3/4] rounded-lg md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-lg md:shadow-2xl transition-all duration-500">
+                        <!-- Carousel -->
+                        <div class="product-carousel" id="carousel-1">
+                            <div class="carousel-track" style="transform: translateX(0%);">
+                                <div class="carousel-slide"><img src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" class="w-full h-full object-cover"></div>
+                                <div class="carousel-slide"><img src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="w-full h-full object-cover"></div>
+                            </div>
+                            <!-- Navigation masquée sur 3 colonnes mobile pour la clarté -->
+                            <div class="carousel-nav hidden md:flex">
+                                <div class="carousel-dot active" onclick="moveCarousel(1, 0)"></div>
+                                <div class="carousel-dot" onclick="moveCarousel(1, 1)"></div>
+                            </div>
+                            <button class="carousel-arrow left-2 md:left-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" onclick="moveCarousel(1, -1, true)"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="carousel-arrow right-2 md:right-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" style="right: 0.5rem;" onclick="moveCarousel(1, 1, true)"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <span class="text-ruby-red font-black uppercase text-[10px] tracking-[0.4em] mb-4 block">Vêtements</span>
-                        <a href="product.html"><h3 class="text-2xl font-luxury font-black text-alabaster hover:text-ruby-red transition tracking-tighter">Veste Sartoriale Rumusha</h3></a>
-                        <p class="text-2xl font-black text-alabaster tracking-tighter mt-4">12 500 DZD</p>
+                    <div class="text-center flex flex-col items-center px-1">
+                        <span class="text-ruby-red font-black uppercase text-[6px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] mb-1 md:mb-4 block">Vêtements</span>
+                        <h3 class="text-[8px] md:text-2xl font-luxury font-black text-white mb-1 md:mb-4 tracking-tighter italic leading-tight">Veste Sartoriale Rumusha</h3>
+                        <p class="text-[9px] md:text-2xl font-black text-ruby-red tracking-tighter mb-2 md:mb-8">12 500 DZD</p>
+                        <a href="product.html" class="btn-commander !px-2 !py-2 md:!px-6 md:!py-4 !text-[5px] md:!text-[10px] !gap-1 md:!gap-3">
+                            <span>Commander</span>
+                            <i class="fa-solid fa-arrow-right-long hidden md:block"></i>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Produit 2 -->
-                <div class="group flex flex-col gap-8">
-                    <div class="relative aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl transition-all duration-500">
-                        <img src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                        <button onclick="addToCart(2, 'Cappotto en Laine Toscane', 35000, 'public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg')" class="absolute bottom-8 right-8 w-16 h-16 bg-alabaster text-carbon rounded-full shadow-3xl flex items-center justify-center text-xl opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-ruby-red hover:text-white">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
+                <div class="group flex flex-col gap-2 md:gap-8">
+                    <div class="relative aspect-[3/4] rounded-lg md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-lg md:shadow-2xl transition-all duration-500">
+                        <!-- Carousel -->
+                        <div class="product-carousel" id="carousel-2">
+                            <div class="carousel-track" style="transform: translateX(0%);">
+                                <div class="carousel-slide"><img src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="w-full h-full object-cover"></div>
+                                <div class="carousel-slide"><img src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" class="w-full h-full object-cover"></div>
+                            </div>
+                            <div class="carousel-nav hidden md:flex">
+                                <div class="carousel-dot active" onclick="moveCarousel(2, 0)"></div>
+                                <div class="carousel-dot" onclick="moveCarousel(2, 1)"></div>
+                            </div>
+                            <button class="carousel-arrow left-2 md:left-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" onclick="moveCarousel(2, -1, true)"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="carousel-arrow right-2 md:right-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" style="right: 0.5rem;" onclick="moveCarousel(2, 1, true)"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <span class="text-ruby-red font-black uppercase text-[10px] tracking-[0.4em] mb-4 block">Manteau</span>
-                        <a href="product-2.html"><h3 class="text-2xl font-luxury font-black text-alabaster hover:text-ruby-red transition tracking-tighter">Cappotto en Laine Toscane</h3></a>
-                        <p class="text-2xl font-black text-alabaster tracking-tighter mt-4">35 000 DZD</p>
+                    <div class="text-center flex flex-col items-center px-1">
+                        <span class="text-ruby-red font-black uppercase text-[6px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] mb-1 md:mb-4 block">Manteau</span>
+                        <h3 class="text-[8px] md:text-2xl font-luxury font-black text-white mb-1 md:mb-4 tracking-tighter italic leading-tight">Cappotto en Laine Toscane</h3>
+                        <p class="text-[9px] md:text-2xl font-black text-ruby-red tracking-tighter mb-2 md:mb-8">35 000 DZD</p>
+                        <a href="product-2.html" class="btn-commander !px-2 !py-2 md:!px-6 md:!py-4 !text-[5px] md:!text-[10px] !gap-1 md:!gap-3">
+                            <span>Commander</span>
+                            <i class="fa-solid fa-arrow-right-long hidden md:block"></i>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Produit 3 -->
-                <div class="group flex flex-col gap-8">
-                    <div class="relative aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl transition-all duration-500">
-                        <img src="public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                        <button onclick="addToCart(3, 'Pantalon Sartorial Noir', 18200, 'public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg')" class="absolute bottom-8 right-8 w-16 h-16 bg-alabaster text-carbon rounded-full shadow-3xl flex items-center justify-center text-xl opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-ruby-red hover:text-white">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
+                <div class="group flex flex-col gap-2 md:gap-8">
+                    <div class="relative aspect-[3/4] rounded-lg md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-lg md:shadow-2xl transition-all duration-500">
+                        <!-- Carousel -->
+                        <div class="product-carousel" id="carousel-3">
+                            <div class="carousel-track" style="transform: translateX(0%);">
+                                <div class="carousel-slide"><img src="public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg" class="w-full h-full object-cover"></div>
+                                <div class="carousel-slide"><img src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="w-full h-full object-cover"></div>
+                            </div>
+                            <div class="carousel-nav hidden md:flex">
+                                <div class="carousel-dot active" onclick="moveCarousel(3, 0)"></div>
+                                <div class="carousel-dot" onclick="moveCarousel(3, 1)"></div>
+                            </div>
+                            <button class="carousel-arrow left-2 md:left-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" onclick="moveCarousel(3, -1, true)"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="carousel-arrow right-2 md:right-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" style="right: 0.5rem;" onclick="moveCarousel(3, 1, true)"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <span class="text-ruby-red font-black uppercase text-[10px] tracking-[0.4em] mb-4 block">Pantalon</span>
-                        <a href="product-3.html"><h3 class="text-2xl font-luxury font-black text-alabaster hover:text-ruby-red transition tracking-tighter">Pantalon Sartorial Noir</h3></a>
-                        <p class="text-2xl font-black text-alabaster tracking-tighter mt-4">18 200 DZD</p>
+                    <div class="text-center flex flex-col items-center px-1">
+                        <span class="text-ruby-red font-black uppercase text-[6px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] mb-1 md:mb-4 block">Pantalon</span>
+                        <h3 class="text-[8px] md:text-2xl font-luxury font-black text-white mb-1 md:mb-4 tracking-tighter italic leading-tight">Pantalon Sartorial Noir</h3>
+                        <p class="text-[9px] md:text-2xl font-black text-ruby-red tracking-tighter mb-2 md:mb-8">18 200 DZD</p>
+                        <a href="product-3.html" class="btn-commander !px-2 !py-2 md:!px-6 md:!py-4 !text-[5px] md:!text-[10px] !gap-1 md:!gap-3">
+                            <span>Commander</span>
+                            <i class="fa-solid fa-arrow-right-long hidden md:block"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -222,6 +258,34 @@
 
     <script>
         let cart = JSON.parse(localStorage.getItem('rumusha_cart')) || [];
+        
+        // Gestion du Carrousel
+        const carouselStates = {
+            1: { current: 0, total: 2 },
+            2: { current: 0, total: 2 },
+            3: { current: 0, total: 2 }
+        };
+
+        function moveCarousel(id, index, relative = false) {
+            const state = carouselStates[id];
+            if(relative) {
+                state.current = (state.current + index + state.total) % state.total;
+            } else {
+                state.current = index;
+            }
+
+            const carousel = document.getElementById(`carousel-${id}`);
+            const track = carousel.querySelector('.carousel-track');
+            const dots = carousel.querySelectorAll('.carousel-dot');
+
+            track.style.transform = `translateX(-${state.current * 100}%)`;
+            
+            dots.forEach((dot, i) => {
+                if(i === state.current) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
         function updateBadge() {
             const count = cart.reduce((acc, item) => acc + item.qty, 0);
             document.querySelectorAll('#cart-count-badge').forEach(el => el.textContent = count);

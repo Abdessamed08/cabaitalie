@@ -100,101 +100,72 @@
     </header>
 
     <!-- DETAIL PRODUIT -->
-    <main class="max-w-[1600px] mx-auto py-20 px-8 lg:px-16">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+    <main class="max-w-[1600px] mx-auto py-8 md:py-20 px-4 md:px-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-start">
             <!-- Galerie -->
-            <div class="space-y-8">
-                <div class="aspect-[4/5] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-3xl relative group">
-                    <img id="main-img" src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" alt="Produit" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                    <div class="absolute top-8 right-8">
-                        <button class="w-14 h-14 bg-alabaster/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-ruby-red transition-all duration-500">
-                            <i class="fa-regular fa-heart text-xl"></i>
-                        </button>
-                    </div>
+            <div class="space-y-4 md:space-y-8">
+                <div class="aspect-[4/5] rounded-2xl md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-xl relative group">
+                    <img id="main-img" src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" alt="Produit" class="w-full h-full object-cover">
                 </div>
-                <div class="grid grid-cols-4 gap-6">
-                    <img onclick="changeImg(this)" src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" class="thumb active aspect-square rounded-2xl overflow-hidden cursor-pointer object-cover">
-                    <img onclick="changeImg(this)" src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="thumb aspect-square rounded-2xl overflow-hidden cursor-pointer object-cover">
+                <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                    <img onclick="changeImg(this)" src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" class="thumb active w-20 h-24 md:w-32 md:h-40 flex-none rounded-xl overflow-hidden cursor-pointer object-cover">
+                    <img onclick="changeImg(this)" src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="thumb w-20 h-24 md:w-32 md:h-40 flex-none rounded-xl overflow-hidden cursor-pointer object-cover">
                 </div>
             </div>
 
             <!-- Infos -->
-            <div class="flex flex-col pt-4">
-                <nav class="flex text-[10px] font-black uppercase tracking-[0.4em] text-gold-leaf/60 gap-4 mb-10">
-                    <a href="index.html" class="hover:text-ruby-red transition">Home</a>
-                    <span>/</span>
-                    <a href="search.html" class="hover:text-ruby-red transition">Collection</a>
-                    <span>/</span>
-                    <span class="text-alabaster">Chemise Kimono Moderne</span>
-                </nav>
-
-                <h1 class="font-luxury text-6xl md:text-8xl font-black text-alabaster mb-8 leading-[0.9] tracking-tighter">Chemise <br><span class="italic">Kimono Moderne</span></h1>
+            <div class="flex flex-col">
+                <h1 class="font-luxury text-4xl md:text-8xl font-black text-white mb-4 md:mb-8 leading-tight tracking-tighter italic">Chemise <span class="text-ruby-red not-italic">Kimono Moderne</span></h1>
                 
-                <div class="flex items-center gap-10 mb-12">
-                    <p class="text-5xl font-black text-ruby-red tracking-tighter">12 500 DZD</p>
-                    <div class="flex items-center gap-3 bg-emerald-dark border border-white/10 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em]">
-                        <span class="w-2 h-2 rounded-full bg-ruby-red animate-pulse"></span> Pièce Unique
-                    </div>
-                </div>
+                <p class="text-3xl md:text-5xl font-black text-ruby-red tracking-tighter mb-8 md:mb-12">12 500 DZD</p>
 
-                <div class="flex text-gold-leaf gap-2 mb-12 items-center">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    <span class="text-white/40 text-xs font-bold ml-4 tracking-widest uppercase">(48 avis de la boutique)</span>
-                </div>
-
-                <!-- Sélecteurs -->
-                <div class="space-y-12 mb-16">
-                    <div class="space-y-6">
-                        <div class="flex justify-between items-end">
-                            <h3 class="font-black text-xs uppercase tracking-[0.3em] text-gold-leaf">Choisir la Taille</h3>
-                            <button class="text-[10px] font-black text-alabaster/40 underline uppercase tracking-widest hover:text-ruby-red transition">Guide Milan</button>
-                        </div>
-                        <div class="flex gap-4">
-                            <button onclick="selectSize(this)" class="size-btn w-16 h-16 rounded-xl border border-white/10 flex items-center justify-center font-black text-lg hover:border-ruby-red transition-all">S</button>
-                            <button onclick="selectSize(this)" class="size-btn w-16 h-16 rounded-xl border-2 border-ruby-red bg-ruby-red/10 flex items-center justify-center font-black text-lg transition-all">M</button>
-                            <button onclick="selectSize(this)" class="size-btn w-16 h-16 rounded-xl border border-white/10 flex items-center justify-center font-black text-lg hover:border-ruby-red transition-all">L</button>
-                            <button onclick="selectSize(this)" class="size-btn w-16 h-16 rounded-xl border border-white/10 flex items-center justify-center font-black text-lg hover:border-ruby-red transition-all">XL</button>
-                        </div>
-                    </div>
-
-                    <div class="space-y-6">
-                        <h3 class="font-black text-xs uppercase tracking-[0.3em] text-gold-leaf">Quantité</h3>
-                        <div class="flex items-center gap-8 bg-white/5 border border-white/10 w-fit p-2 rounded-xl">
-                            <button onclick="updatePageQty(-1)" class="w-12 h-12 rounded-lg hover:bg-ruby-red transition flex items-center justify-center text-xl"><i class="fa-solid fa-minus"></i></button>
-                            <span id="page-qty" class="text-2xl font-black w-10 text-center">1</span>
-                            <button onclick="updatePageQty(1)" class="w-12 h-12 rounded-lg hover:bg-ruby-red transition flex items-center justify-center text-xl"><i class="fa-solid fa-plus"></i></button>
+                <!-- Sélecteurs simplifiés -->
+                <div class="space-y-8 mb-12">
+                    <div class="space-y-4">
+                        <h3 class="font-black text-[10px] uppercase tracking-[0.3em] text-gold-leaf">Taille</h3>
+                        <div class="flex gap-3">
+                            <button onclick="selectSize(this)" class="size-btn w-12 h-12 md:w-16 md:h-16 rounded-xl border border-white/10 flex items-center justify-center font-black text-sm md:text-lg hover:border-ruby-red transition-all">S</button>
+                            <button onclick="selectSize(this)" class="size-btn w-12 h-12 md:w-16 md:h-16 rounded-xl border-2 border-ruby-red bg-ruby-red/10 flex items-center justify-center font-black text-sm md:text-lg transition-all">M</button>
+                            <button onclick="selectSize(this)" class="size-btn w-12 h-12 md:w-16 md:h-16 rounded-xl border border-white/10 flex items-center justify-center font-black text-sm md:text-lg hover:border-ruby-red transition-all">L</button>
+                            <button onclick="selectSize(this)" class="size-btn w-12 h-12 md:w-16 md:h-16 rounded-xl border border-white/10 flex items-center justify-center font-black text-sm md:text-lg hover:border-ruby-red transition-all">XL</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-6">
-                    <button onclick="addCurrentToCart()" class="btn-buy">
-                        <i class="fa-solid fa-shopping-cart"></i> Ajouter au Panier
-                    </button>
-                    <div class="flex items-center justify-center gap-8 opacity-40 grayscale pt-4">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="h-4">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" class="h-6">
-                    </div>
-                </div>
+                <!-- Bouton Action -->
+                <button onclick="scrollToOrder()" class="btn-buy !rounded-2xl !py-6 !text-sm shadow-2xl">
+                    <i class="fa-solid fa-bag-shopping"></i> Commander Maintenant
+                </button>
 
-                <!-- Accordéon Détails -->
-                <div class="mt-24 border-t border-white/10 pt-12 space-y-10">
-                    <div class="group cursor-pointer">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="font-black text-sm uppercase tracking-[0.3em] text-alabaster">L'Artisanat Italien</h3>
-                            <i class="fa-solid fa-plus text-xs transition group-hover:rotate-45 text-gold-leaf"></i>
+                <!-- FORMULAIRE DE COMMANDE INTÉGRÉ ET SIMPLIFIÉ -->
+                <div id="order-section" class="mt-12 md:mt-20 bg-carbon/40 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-10 border border-white/5 shadow-2xl">
+                    <h2 class="font-luxury text-2xl md:text-4xl font-black text-white mb-8 italic">Finaliser la <span class="text-ruby-red">Commande</span></h2>
+
+                    <form id="order-form" class="space-y-6">
+                        <div class="space-y-2">
+                            <label class="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 ml-2">Nom Complet</label>
+                            <input type="text" required placeholder="Votre nom" class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-ruby-red transition text-sm">
                         </div>
-                        <p class="text-alabaster/60 leading-relaxed font-medium italic">
-                            Chaque pièce est confectionnée avec soin par nos maîtres tailleurs. Nous utilisons exclusivement des fibres naturelles provenant des meilleures filatures de Toscane.
-                        </p>
-                    </div>
-                    <div class="group cursor-pointer border-t border-white/10 pt-10">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="font-black text-sm uppercase tracking-[0.3em] text-alabaster">Livraison & Retours</h3>
-                            <i class="fa-solid fa-plus text-xs text-gold-leaf"></i>
+                        <div class="space-y-2">
+                            <label class="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 ml-2">Téléphone</label>
+                            <input type="tel" required placeholder="05/06/07XXXXXXXX" class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-ruby-red transition text-sm">
                         </div>
-                    </div>
+                        <div class="space-y-2">
+                            <label class="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 ml-2">Adresse</label>
+                            <input type="text" required placeholder="Ville, Quartier..." class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-ruby-red transition text-sm">
+                        </div>
+                        
+                        <!-- Champ Taille caché mais synchronisé -->
+                        <input type="hidden" id="selected-size-input" value="M">
+
+                        <button type="submit" class="w-full bg-ruby-red text-white py-5 rounded-xl font-black uppercase tracking-[0.3em] text-[10px] hover:bg-white hover:text-carbon transition-all duration-500 shadow-xl">
+                            Confirmer l'achat
+                        </button>
+                    </form>
                 </div>
+            </div>
+        </div>
+    </main>
             </div>
         </div>
     </main>
@@ -252,6 +223,10 @@
         let cart = JSON.parse(localStorage.getItem('rumusha_cart')) || [];
         let currentQty = 1;
 
+        function scrollToOrder() {
+            document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
         function updatePageQty(delta) {
             currentQty += delta;
             if(currentQty < 1) currentQty = 1;
@@ -271,7 +246,25 @@
             });
             btn.classList.add('border-ruby-red', 'bg-ruby-red/10');
             btn.classList.remove('border-white/10');
+            
+            // Mettre à jour le champ du formulaire
+            document.getElementById('selected-size-input').value = btn.textContent;
         }
+
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Traitement...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Commande Envoyée !';
+                btn.style.backgroundColor = '#1B3022'; // Emerald dark
+                alert('Merci ! Votre commande a été reçue. Nous vous contacterons bientôt pour confirmer la livraison.');
+            }, 2000);
+        });
 
         function addCurrentToCart() {
             const title = "Chemise Kimono Moderne";
