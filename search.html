@@ -31,7 +31,7 @@
         #cart-sidebar.closed { transform: translateX(100%); }
 
         /* Carousel Styles */
-        .product-carousel { position: relative; width: 100%; height: 100%; overflow: hidden; }
+        .product-carousel { position: relative; width: 100%; height: 100%; overflow: hidden; touch-action: pan-y; user-select: none; }
         .carousel-track { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
         .carousel-slide { min-width: 100%; height: 100%; }
         .carousel-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
@@ -118,30 +118,30 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-3 md:grid-cols-2 xl:grid-cols-3 gap-2 md:gap-16">
+            <div class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-16">
                 <!-- Produit 1 -->
-                <div class="group flex flex-col gap-2 md:gap-8">
-                    <div class="relative aspect-[3/4] rounded-lg md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-lg md:shadow-2xl transition-all duration-500">
+                <div class="group flex flex-col gap-4 md:gap-8">
+                    <div class="relative aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-lg md:shadow-2xl transition-all duration-500">
                         <!-- Carousel -->
                         <div class="product-carousel" id="carousel-1">
                             <div class="carousel-track" style="transform: translateX(0%);">
                                 <div class="carousel-slide"><img src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" class="w-full h-full object-cover"></div>
                                 <div class="carousel-slide"><img src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="w-full h-full object-cover"></div>
                             </div>
-                            <!-- Navigation masquée sur 3 colonnes mobile pour la clarté -->
-                            <div class="carousel-nav hidden md:flex">
-                                <div class="carousel-dot active" onclick="moveCarousel(1, 0)"></div>
-                                <div class="carousel-dot" onclick="moveCarousel(1, 1)"></div>
+                            <!-- Navigation par points visible sur mobile -->
+                            <div class="carousel-nav flex">
+                                <div class="carousel-dot active !w-1.5 !h-1.5 md:!w-2 md:!h-2" onclick="moveCarousel(1, 0)"></div>
+                                <div class="carousel-dot !w-1.5 !h-1.5 md:!w-2 md:!h-2" onclick="moveCarousel(1, 1)"></div>
                             </div>
-                            <button class="carousel-arrow left-2 md:left-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" onclick="moveCarousel(1, -1, true)"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button class="carousel-arrow right-2 md:right-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" style="right: 0.5rem;" onclick="moveCarousel(1, 1, true)"><i class="fa-solid fa-chevron-right"></i></button>
+                            <button class="carousel-arrow left-2 md:left-4 w-8 h-8 md:w-10 md:h-10 text-xs md:text-base opacity-0 md:opacity-0 group-hover:opacity-100" onclick="moveCarousel(1, -1, true)"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="carousel-arrow right-2 md:right-4 w-8 h-8 md:w-10 md:h-10 text-xs md:text-base opacity-0 md:opacity-0 group-hover:opacity-100" style="right: 0.5rem;" onclick="moveCarousel(1, 1, true)"><i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
-                    <div class="text-center flex flex-col items-center px-1">
-                        <span class="text-ruby-red font-black uppercase text-[6px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] mb-1 md:mb-4 block">Vêtements</span>
-                        <h3 class="text-[8px] md:text-2xl font-luxury font-black text-white mb-1 md:mb-4 tracking-tighter italic leading-tight">Veste Sartoriale Rumusha</h3>
-                        <p class="text-[9px] md:text-2xl font-black text-ruby-red tracking-tighter mb-2 md:mb-8">12 500 DZD</p>
-                        <a href="product.html" class="btn-commander !px-2 !py-2 md:!px-6 md:!py-4 !text-[5px] md:!text-[10px] !gap-1 md:!gap-3">
+                    <div class="text-center flex flex-col items-center px-2">
+                        <span class="text-ruby-red font-black uppercase text-[8px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] mb-2 md:mb-4 block">Vêtements</span>
+                        <h3 class="text-[12px] md:text-2xl font-luxury font-black text-white mb-2 md:mb-4 tracking-tighter italic leading-tight">Veste Sartoriale Rumusha</h3>
+                        <p class="text-[14px] md:text-2xl font-black text-ruby-red tracking-tighter mb-3 md:mb-8">12 500 DZD</p>
+                        <a href="product.html" class="btn-commander !px-4 !py-3 md:!px-6 md:!py-4 !text-[8px] md:!text-[10px] !gap-2 md:!gap-3">
                             <span>Commander</span>
                             <i class="fa-solid fa-arrow-right-long hidden md:block"></i>
                         </a>
@@ -149,27 +149,27 @@
                 </div>
 
                 <!-- Produit 2 -->
-                <div class="group flex flex-col gap-2 md:gap-8">
-                    <div class="relative aspect-[3/4] rounded-lg md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-lg md:shadow-2xl transition-all duration-500">
+                <div class="group flex flex-col gap-4 md:gap-8">
+                    <div class="relative aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-lg md:shadow-2xl transition-all duration-500">
                         <!-- Carousel -->
                         <div class="product-carousel" id="carousel-2">
                             <div class="carousel-track" style="transform: translateX(0%);">
                                 <div class="carousel-slide"><img src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="w-full h-full object-cover"></div>
                                 <div class="carousel-slide"><img src="public/images/home/604051723_17866643946519012_3981411498029541433_n.jpg" class="w-full h-full object-cover"></div>
                             </div>
-                            <div class="carousel-nav hidden md:flex">
-                                <div class="carousel-dot active" onclick="moveCarousel(2, 0)"></div>
-                                <div class="carousel-dot" onclick="moveCarousel(2, 1)"></div>
+                            <div class="carousel-nav flex">
+                                <div class="carousel-dot active !w-1.5 !h-1.5 md:!w-2 md:!h-2" onclick="moveCarousel(2, 0)"></div>
+                                <div class="carousel-dot !w-1.5 !h-1.5 md:!w-2 md:!h-2" onclick="moveCarousel(2, 1)"></div>
                             </div>
-                            <button class="carousel-arrow left-2 md:left-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" onclick="moveCarousel(2, -1, true)"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button class="carousel-arrow right-2 md:right-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" style="right: 0.5rem;" onclick="moveCarousel(2, 1, true)"><i class="fa-solid fa-chevron-right"></i></button>
+                            <button class="carousel-arrow left-2 md:left-4 w-8 h-8 md:w-10 md:h-10 text-xs md:text-base opacity-0 md:opacity-0 group-hover:opacity-100" onclick="moveCarousel(2, -1, true)"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="carousel-arrow right-2 md:right-4 w-8 h-8 md:w-10 md:h-10 text-xs md:text-base opacity-0 md:opacity-0 group-hover:opacity-100" style="right: 0.5rem;" onclick="moveCarousel(2, 1, true)"><i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
-                    <div class="text-center flex flex-col items-center px-1">
-                        <span class="text-ruby-red font-black uppercase text-[6px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] mb-1 md:mb-4 block">Manteau</span>
-                        <h3 class="text-[8px] md:text-2xl font-luxury font-black text-white mb-1 md:mb-4 tracking-tighter italic leading-tight">Cappotto en Laine Toscane</h3>
-                        <p class="text-[9px] md:text-2xl font-black text-ruby-red tracking-tighter mb-2 md:mb-8">35 000 DZD</p>
-                        <a href="product-2.html" class="btn-commander !px-2 !py-2 md:!px-6 md:!py-4 !text-[5px] md:!text-[10px] !gap-1 md:!gap-3">
+                    <div class="text-center flex flex-col items-center px-2">
+                        <span class="text-ruby-red font-black uppercase text-[8px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] mb-2 md:mb-4 block">Manteau</span>
+                        <h3 class="text-[12px] md:text-2xl font-luxury font-black text-white mb-2 md:mb-4 tracking-tighter italic leading-tight">Cappotto en Laine Toscane</h3>
+                        <p class="text-[14px] md:text-2xl font-black text-ruby-red tracking-tighter mb-3 md:mb-8">35 000 DZD</p>
+                        <a href="product-2.html" class="btn-commander !px-4 !py-3 md:!px-6 md:!py-4 !text-[8px] md:!text-[10px] !gap-2 md:!gap-3">
                             <span>Commander</span>
                             <i class="fa-solid fa-arrow-right-long hidden md:block"></i>
                         </a>
@@ -177,27 +177,27 @@
                 </div>
 
                 <!-- Produit 3 -->
-                <div class="group flex flex-col gap-2 md:gap-8">
-                    <div class="relative aspect-[3/4] rounded-lg md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-lg md:shadow-2xl transition-all duration-500">
+                <div class="group flex flex-col gap-4 md:gap-8">
+                    <div class="relative aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-lg md:shadow-2xl transition-all duration-500">
                         <!-- Carousel -->
                         <div class="product-carousel" id="carousel-3">
                             <div class="carousel-track" style="transform: translateX(0%);">
                                 <div class="carousel-slide"><img src="public/images/home/S%20M%20L%20XL%20XXL%20🇮🇹.jpg" class="w-full h-full object-cover"></div>
                                 <div class="carousel-slide"><img src="public/images/home/616004799_17869464138519012_6944866003065883824_n.jpg" class="w-full h-full object-cover"></div>
                             </div>
-                            <div class="carousel-nav hidden md:flex">
-                                <div class="carousel-dot active" onclick="moveCarousel(3, 0)"></div>
-                                <div class="carousel-dot" onclick="moveCarousel(3, 1)"></div>
+                            <div class="carousel-nav flex">
+                                <div class="carousel-dot active !w-1.5 !h-1.5 md:!w-2 md:!h-2" onclick="moveCarousel(3, 0)"></div>
+                                <div class="carousel-dot !w-1.5 !h-1.5 md:!w-2 md:!h-2" onclick="moveCarousel(3, 1)"></div>
                             </div>
-                            <button class="carousel-arrow left-2 md:left-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" onclick="moveCarousel(3, -1, true)"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button class="carousel-arrow right-2 md:right-4 w-6 h-6 md:w-10 md:h-10 text-[10px] md:text-base" style="right: 0.5rem;" onclick="moveCarousel(3, 1, true)"><i class="fa-solid fa-chevron-right"></i></button>
+                            <button class="carousel-arrow left-2 md:left-4 w-8 h-8 md:w-10 md:h-10 text-xs md:text-base opacity-0 md:opacity-0 group-hover:opacity-100" onclick="moveCarousel(3, -1, true)"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="carousel-arrow right-2 md:right-4 w-8 h-8 md:w-10 md:h-10 text-xs md:text-base opacity-0 md:opacity-0 group-hover:opacity-100" style="right: 0.5rem;" onclick="moveCarousel(3, 1, true)"><i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
-                    <div class="text-center flex flex-col items-center px-1">
-                        <span class="text-ruby-red font-black uppercase text-[6px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] mb-1 md:mb-4 block">Pantalon</span>
-                        <h3 class="text-[8px] md:text-2xl font-luxury font-black text-white mb-1 md:mb-4 tracking-tighter italic leading-tight">Pantalon Sartorial Noir</h3>
-                        <p class="text-[9px] md:text-2xl font-black text-ruby-red tracking-tighter mb-2 md:mb-8">18 200 DZD</p>
-                        <a href="product-3.html" class="btn-commander !px-2 !py-2 md:!px-6 md:!py-4 !text-[5px] md:!text-[10px] !gap-1 md:!gap-3">
+                    <div class="text-center flex flex-col items-center px-2">
+                        <span class="text-ruby-red font-black uppercase text-[8px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] mb-2 md:mb-4 block">Pantalon</span>
+                        <h3 class="text-[12px] md:text-2xl font-luxury font-black text-white mb-2 md:mb-4 tracking-tighter italic leading-tight">Pantalon Sartorial Noir</h3>
+                        <p class="text-[14px] md:text-2xl font-black text-ruby-red tracking-tighter mb-3 md:mb-8">18 200 DZD</p>
+                        <a href="product-3.html" class="btn-commander !px-4 !py-3 md:!px-6 md:!py-4 !text-[8px] md:!text-[10px] !gap-2 md:!gap-3">
                             <span>Commander</span>
                             <i class="fa-solid fa-arrow-right-long hidden md:block"></i>
                         </a>
@@ -206,48 +206,24 @@
             </div>
 
             <!-- Pagination -->
-            <div class="mt-32 flex justify-center gap-6">
-                <button class="w-16 h-16 rounded-xl bg-ruby-red text-white font-black shadow-2xl">1</button>
-                <button class="w-16 h-16 rounded-xl bg-white/5 border border-white/10 font-black hover:border-ruby-red transition uppercase tracking-widest text-[10px]">2</button>
-                <button class="w-16 h-16 rounded-xl bg-white/5 border border-white/10 font-black hover:border-ruby-red transition flex items-center justify-center"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+            <div class="mt-20 md:mt-32 flex justify-center gap-4 md:gap-6">
+                <button class="w-12 h-12 md:w-16 md:h-16 rounded-lg md:rounded-xl bg-ruby-red text-white font-black shadow-2xl text-xs md:text-base">1</button>
+                <button class="w-12 h-12 md:w-16 md:h-16 rounded-lg md:rounded-xl bg-white/5 border border-white/10 font-black hover:border-ruby-red transition uppercase tracking-widest text-[8px] md:text-[10px]">2</button>
+                <button class="w-12 h-12 md:w-16 md:h-16 rounded-lg md:rounded-xl bg-white/5 border border-white/10 font-black hover:border-ruby-red transition flex items-center justify-center"><i class="fa-solid fa-chevron-right text-[10px] md:text-xs"></i></button>
             </div>
         </div>
     </main>
 
     <!-- FOOTER -->
     <footer class="bg-carbon pt-32 pb-12 px-8 lg:px-16 border-t border-white/5">
-        <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-24 mb-24">
-            <div class="col-span-1 md:col-span-1">
+        <div class="max-w-[1600px] mx-auto flex flex-col items-center text-center mb-12 md:mb-24">
+            <div class="max-w-md">
                 <a href="#" class="font-luxury text-4xl font-black mb-8 block uppercase tracking-tighter">caba_italie2</a>
                 <p class="text-alabaster/40 font-medium leading-relaxed mb-12 italic">L'excellence de la couture italienne rencontre l'innovation du design moderne. Créé à Milan, porté dans le monde entier.</p>
-                <div class="flex gap-10">
+                <div class="flex justify-center gap-10">
                     <a href="#" class="text-2xl hover:text-ruby-red transition"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#" class="text-2xl hover:text-ruby-red transition"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
-            </div>
-            
-            <div class="space-y-10">
-                <h4 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf">Boutique</h4>
-                <ul class="space-y-4 font-bold text-xs text-alabaster/40 uppercase tracking-widest">
-                    <li><a href="search.html" class="hover:text-ruby-red transition">Collection</a></li>
-                    <li><a href="index.html" class="hover:text-ruby-red transition">Accueil</a></li>
-                </ul>
-            </div>
-
-            <div class="space-y-10">
-                <h4 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf">Assistance</h4>
-                <ul class="space-y-4 font-bold text-xs text-alabaster/40 uppercase tracking-widest">
-                    <li><a href="#" class="hover:text-ruby-red transition">Livraison</a></li>
-                    <li><a href="#" class="hover:text-ruby-red transition">FAQ</a></li>
-                </ul>
-            </div>
-
-            <div class="space-y-12">
-                <h4 class="font-black uppercase tracking-[0.4em] text-[10px] text-gold-leaf">Newsletter</h4>
-                <form class="flex border-b border-white/20 pb-4">
-                    <input type="email" placeholder="Votre email" class="bg-transparent flex-1 outline-none text-xs font-black placeholder:opacity-20 uppercase tracking-widest">
-                    <button class="text-ruby-red hover:text-alabaster transition"><i class="fa-solid fa-arrow-right-long"></i></button>
-                </form>
             </div>
         </div>
         
@@ -285,6 +261,38 @@
                 else dot.classList.remove('active');
             });
         }
+
+        // Ajout du support Swipe (Touch) pour mobile
+        document.querySelectorAll('.product-carousel').forEach(carousel => {
+            let startX = 0;
+            let endX = 0;
+            const id = carousel.id.replace('carousel-', '');
+
+            carousel.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+
+            carousel.addEventListener('touchend', e => {
+                endX = e.changedTouches[0].clientX;
+                const diff = startX - endX;
+                if (Math.abs(diff) > 50) { // Seuil de swipe
+                    if (diff > 0) moveCarousel(id, 1, true); // Swipe gauche -> Suivant
+                    else moveCarousel(id, -1, true); // Swipe droite -> Précédent
+                }
+            }, { passive: true });
+
+            // Support clavier (flèches) au survol
+            carousel.addEventListener('mouseenter', () => {
+                const keyHandler = (e) => {
+                    if (e.key === 'ArrowRight') moveCarousel(id, 1, true);
+                    if (e.key === 'ArrowLeft') moveCarousel(id, -1, true);
+                };
+                window.addEventListener('keydown', keyHandler);
+                carousel.addEventListener('mouseleave', () => {
+                    window.removeEventListener('keydown', keyHandler);
+                }, { once: true });
+            });
+        });
 
         function updateBadge() {
             const count = cart.reduce((acc, item) => acc + item.qty, 0);
